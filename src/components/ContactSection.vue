@@ -1,0 +1,247 @@
+﻿<script setup lang="ts">
+import { ref, onMounted } from 'vue'
+import gsap from 'gsap'
+import ScrollTrigger from 'gsap/ScrollTrigger'
+
+const el = ref<HTMLElement | null>(null)
+const form = ref({ name: '', email: '', message: '' })
+
+function submit() {
+  // placeholder
+}
+
+onMounted(() => {
+  if (!el.value) return
+  gsap.from(el.value.querySelectorAll('.c-left > *, .c-form-wrap'), {
+    scrollTrigger: { trigger: el.value, start: 'top 75%' },
+    y: 40, opacity: 0, duration: 0.75, ease: 'power2.out', stagger: 0.12
+  })
+})
+</script>
+
+<template>
+  <section id="contact" class="contact" ref="el">
+    <div class="c-inner">
+
+      <div class="c-label-row">
+        <span class="section-num">[ 04 ]</span>
+        <div class="section-rule"></div>
+        <span class="c-label-text">CONTACT</span>
+        <span class="c-tech-tag" aria-hidden="true">{+}</span>
+      </div>
+
+      <div class="c-grid">
+
+        <div class="c-left">
+          <div class="c-frame c-frame--tl" aria-hidden="true"></div>
+          <h2 class="c-title">Let&apos;s<br /><em>talk.</em></h2>
+          <p class="c-desc">
+            Open to freelance, collaborations, and full-time roles.
+            If you have a project in mind — reach out.
+          </p>
+          <div class="c-links">
+            <a href="mailto:hello@zvou.design" class="c-link">
+              <span class="c-link-label">Email</span>
+              <span class="c-link-val">hello@zvou.design</span>
+            </a>
+            <a href="https://linkedin.com" target="_blank" class="c-link">
+              <span class="c-link-label">LinkedIn</span>
+              <span class="c-link-val">zvou</span>
+            </a>
+            <a href="https://github.com" target="_blank" class="c-link">
+              <span class="c-link-label">GitHub</span>
+              <span class="c-link-val">zvou</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="c-form-wrap">
+          <form class="c-form" @submit.prevent="submit">
+            <div class="c-field">
+              <label>Name</label>
+              <input v-model="form.name" type="text" placeholder="Your name" autocomplete="off" />
+            </div>
+            <div class="c-field">
+              <label>Email</label>
+              <input v-model="form.email" type="email" placeholder="your@email.com" autocomplete="off" />
+            </div>
+            <div class="c-field">
+              <label>Message</label>
+              <textarea v-model="form.message" rows="5" placeholder="Tell me about your project"></textarea>
+            </div>
+            <button type="submit" class="btn-fill">Send message ↗</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <span class="footer-copy">&copy; 2026 zvou</span>
+      <span class="footer-avail">
+        <span class="avail-dot"></span>Available for work
+      </span>
+    </footer>
+  </section>
+</template>
+
+<style scoped>
+.contact {
+  position: relative;
+  padding: 8rem 5vw 0;
+  background: transparent;
+}
+.c-inner { max-width: 1200px; margin: 0 auto; }
+
+.c-label-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 4rem; }
+.c-label-text { font-family: var(--font-body); font-size: 0.68rem; letter-spacing: 0.25em; color: var(--fg-dim); }
+.c-tech-tag { font-family: var(--font-body); font-size: 0.58rem; letter-spacing: 0.15em; color: var(--accent); opacity: 0.6; }
+
+.c-left { position: relative; }
+.c-frame {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+}
+.c-frame--tl {
+  top: -1rem;
+  left: -1.2rem;
+  border-top: 1px solid rgba(40, 40, 255, 0.5);
+  border-left: 1px solid rgba(40, 40, 255, 0.5);
+}
+
+.c-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: start;
+}
+
+.c-title {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 8vw, 8rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  margin-bottom: 2rem;
+}
+.c-title em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+  color: var(--accent);
+  font-size: 0.9em;
+}
+
+.c-desc {
+  color: var(--fg-dim);
+  font-size: 0.97rem;
+  line-height: 1.75;
+  max-width: 360px;
+  margin-bottom: 2.5rem;
+}
+
+.c-links { display: flex; flex-direction: column; gap: 0; border-top: 1px solid rgba(242,237,228,0.1); }
+.c-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(242,237,228,0.1);
+  transition: padding-left 0.2s;
+}
+.c-link:hover { padding-left: 0.5rem; }
+.c-link:hover .c-link-val { color: var(--accent); }
+.c-link-label { font-family: var(--font-body); font-size: 0.68rem; letter-spacing: 0.15em; color: var(--fg-dim); }
+.c-link-val { font-family: var(--font-body); font-size: 0.88rem; color: var(--fg); transition: color 0.2s; }
+
+.c-form { display: flex; flex-direction: column; gap: 1.5rem; }
+
+.c-field { display: flex; flex-direction: column; gap: 0.5rem; }
+.c-field label {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+}
+.c-field input,
+.c-field textarea {
+  background: var(--bg2);
+  border: 1px solid rgba(13, 11, 8, 0.12);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  padding: 0.85rem 1rem;
+  outline: none;
+  resize: none;
+  transition: border-color 0.2s;
+}
+.c-field input:focus,
+.c-field textarea:focus {
+  border-color: var(--accent);
+}
+
+.btn-fill {
+  background: var(--accent);
+  color: #0f0d0a;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 1rem 2rem;
+  border: none;
+  cursor: none;
+  transition: opacity 0.2s;
+  align-self: flex-start;
+}
+.btn-fill:hover { opacity: 0.85; }
+
+/* Footer */
+.site-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 0;
+  margin-top: 6rem;
+  border-top: 1px solid rgba(13, 11, 8, 0.1);
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.footer-copy {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--fg-dim);
+}
+.footer-avail {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--fg-dim);
+}
+.avail-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  animation: pulse 1.8s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+
+@media (max-width: 768px) {
+  .contact { padding: 5rem 1.5rem 0; }
+  .c-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .site-footer { margin-top: 4rem; }
+}
+</style>
+
