@@ -1,6 +1,15 @@
 ﻿/* â”€â”€â”€ Reset & Base â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* ─── Custom fonts ─────────────────────────────────────────────────── */
+@font-face {
+  font-family: 'IllusionSerif';
+  src: url('/Fonts/IllusionSerif-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --bg:           #f0ece5;
   --bg2:          #e8e4dc;
@@ -8,7 +17,7 @@
   --fg-dim:       #6e6860;
   --accent:       #2828ff;
   --font-display: 'Big Shoulders Display', sans-serif;
-  --font-serif:   'Instrument Serif', serif;
+  --font-serif:   'IllusionSerif', serif;
   --font-body:    'Space Grotesk', sans-serif;
 }
 
