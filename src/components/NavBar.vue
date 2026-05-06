@@ -1,8 +1,9 @@
 ﻿<script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 
-const scrolled = ref(false)
-const menuOpen = ref(false)
+const scrolled  = ref(false)
+const menuOpen  = ref(false)
+const darkMode  = ref(false)
 
 const links = [
   { label: 'About',    href: '#about' },
@@ -12,10 +13,24 @@ const links = [
 ]
 
 function onScroll() { scrolled.value = window.scrollY > 40 }
-onMounted(() => window.addEventListener('scroll', onScroll))
+onMounted(() => {
+  window.addEventListener('scroll', onScroll)
+  // Respect OS preference on first load
+  darkMode.value = window.matchMedia('(prefers-color-scheme: dark)').matches
+  applyTheme()
+})
 onUnmounted(() => window.removeEventListener('scroll', onScroll))
 
 function closeMenu() { menuOpen.value = false }
+
+function toggleDark() {
+  darkMode.value = !darkMode.value
+  applyTheme()
+}
+function applyTheme() {
+  document.documentElement.classList.toggle('dark',  darkMode.value)
+  document.documentElement.classList.toggle('light', !darkMode.value)
+}
 </script>
 
 <template>
@@ -25,6 +40,11 @@ function closeMenu() { menuOpen.value = false }
     <nav class="links">
       <a v-for="l in links" :key="l.href" :href="l.href">{{ l.label }}</a>
     </nav>
+
+    <button class="theme-toggle" @click="toggleDark" :aria-label="darkMode ? 'Switch to light mode' : 'Switch to dark mode'">
+      <span v-if="darkMode">&#9788;</span>
+      <span v-else>&#9790;</span>
+    </button>
 
     <button class="burger" :class="{ open: menuOpen }" @click="menuOpen = !menuOpen" aria-label="Menu">
       <span /><span />
@@ -74,6 +94,21 @@ function closeMenu() { menuOpen.value = false }
   transition: color 0.2s;
 }
 .links a:hover { color: var(--fg); }
+
+.theme-toggle {
+  background: none;
+  border: 1px solid rgba(13, 11, 8, 0.15);
+  color: var(--fg-dim);
+  font-size: 1rem;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s, border-color 0.2s;
+  cursor: none;
+}
+.theme-toggle:hover { color: var(--fg); border-color: var(--accent); }
 
 .burger {
   display: none;

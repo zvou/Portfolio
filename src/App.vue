@@ -2,6 +2,7 @@
 import { onMounted } from 'vue'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import CustomCursor from './components/CustomCursor.vue'
+import ProgressBar from './components/ProgressBar.vue'
 import MarqueeTicker from './components/MarqueeTicker.vue'
 import NavBar from './components/NavBar.vue'
 import HeroSection from './components/HeroSection.vue'
@@ -18,6 +19,7 @@ onMounted(() => {
 
 <template>
   <CustomCursor />
+  <ProgressBar />
   <NavBar />
   <main>
     <HeroSection />

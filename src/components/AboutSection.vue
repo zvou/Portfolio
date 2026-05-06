@@ -47,7 +47,7 @@ onMounted(() => {
 
           <div class="a-body">
             <p>
-              Hey — I'm Zvou. A web designer who cares deeply about how things feel,
+              Hey — I'm Amalie Wallenius AKA Zvou . A web designer who cares deeply about how things feel,
               not just how they look. I work at the edge of typography, motion, and code
               to build experiences that have real personality.
             </p>

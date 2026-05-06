@@ -5,6 +5,19 @@ import ScrollTrigger from 'gsap/ScrollTrigger'
 
 const el = ref<HTMLElement | null>(null)
 const form = ref({ name: '', email: '', message: '' })
+const emailCopied = ref(false)
+const EMAIL = 'hello@zvou.design'
+
+async function copyEmail(e: MouseEvent) {
+  e.preventDefault()
+  try {
+    await navigator.clipboard.writeText(EMAIL)
+    emailCopied.value = true
+    setTimeout(() => { emailCopied.value = false }, 2000)
+  } catch {
+    window.location.href = `mailto:${EMAIL}`
+  }
+}
 
 function submit() {
   // placeholder
@@ -40,9 +53,9 @@ onMounted(() => {
             If you have a project in mind — reach out.
           </p>
           <div class="c-links">
-            <a href="mailto:hello@zvou.design" class="c-link">
+            <a href="mailto:hello@zvou.design" class="c-link c-link--email" @click="copyEmail">
               <span class="c-link-label">Email</span>
-              <span class="c-link-val">hello@zvou.design</span>
+              <span class="c-link-val">{{ emailCopied ? 'Copied!' : 'hello@zvou.design' }}</span>
             </a>
             <a href="https://linkedin.com" target="_blank" class="c-link">
               <span class="c-link-label">LinkedIn</span>
@@ -157,6 +170,7 @@ onMounted(() => {
 .c-link:hover .c-link-val { color: var(--accent); }
 .c-link-label { font-family: var(--font-body); font-size: 0.68rem; letter-spacing: 0.15em; color: var(--fg-dim); }
 .c-link-val { font-family: var(--font-body); font-size: 0.88rem; color: var(--fg); transition: color 0.2s; }
+.c-link--email .c-link-val { transition: color 0.2s, opacity 0.15s; }
 
 .c-form { display: flex; flex-direction: column; gap: 1.5rem; }
 

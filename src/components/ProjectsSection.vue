@@ -1,24 +1,69 @@
 ﻿<script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import gsap from 'gsap'
-import ScrollTrigger from 'gsap/ScrollTrigger'
 
 const el = ref<HTMLElement | null>(null)
 
+// Preview image: use a placeholder gradient per project (swap src for real screenshots)
 const projects = [
-  { id: '01', title: 'Neon Pulse',      category: 'Brand Identity', type: 'Web Design',    year: '2025' },
-  { id: '02', title: 'Axion UI',        category: 'Design System',  type: 'UI Kit',        year: '2025' },
-  { id: '03', title: 'Orbital',         category: 'Web App',        type: 'Motion Design', year: '2024' },
-  { id: '04', title: 'Synthetic Bloom', category: 'Editorial',      type: 'Concept',       year: '2024' },
+  {
+    id: '01', title: 'The Arsenal',         category: 'Digital Library', type: 'Web Design',    year: '2026',
+    note: 'Built a searchable digital library with custom filtering and editorial layout.',
+    thumb: 'https://placehold.co/320x200/0d0b08/f0ece5?text=The+Arsenal',
+  },
+  {
+    id: '02', title: 'TC2026 Relay Tracker', category: 'Design System',  type: 'UI Kit',        year: '2026',
+    note: 'Designed a real-time relay race tracker with live data and responsive dashboard.',
+    thumb: 'https://placehold.co/320x200/2828ff/f0ece5?text=TC2026',
+  },
+  {
+    id: '03', title: 'Recipe Library',       category: 'Web App',        type: 'Motion Design', year: '2026',
+    note: 'Created an interactive recipe app with smooth page transitions and ingredient filters.',
+    thumb: 'https://placehold.co/320x200/0d0b08/f0ece5?text=Recipe+Library',
+  },
+  {
+    id: '04', title: 'Pokédex',              category: 'Editorial',      type: 'Concept',       year: '2026',
+    note: 'Reimagined the Pokédex as an editorial web experience with typographic hierarchy.',
+    thumb: 'https://placehold.co/320x200/2828ff/f0ece5?text=Pokedex',
+  },
 ]
 
+// Floating preview card
+const previewVisible = ref(false)
+const previewSrc     = ref('')
+const previewX       = ref(0)
+const previewY       = ref(0)
+let previewRaf       = 0
+let targetX = 0, targetY = 0
+
+function onRowEnter(thumb: string) {
+  previewSrc.value     = thumb
+  previewVisible.value = true
+}
+function onRowLeave() {
+  previewVisible.value = false
+}
+function onRowMove(e: MouseEvent) {
+  targetX = e.clientX + 24
+  targetY = e.clientY - 60
+}
+
+function lerpPreview() {
+  previewX.value += (targetX - previewX.value) * 0.12
+  previewY.value += (targetY - previewY.value) * 0.12
+  previewRaf = requestAnimationFrame(lerpPreview)
+}
+
 onMounted(() => {
+  lerpPreview()
   if (!el.value) return
   gsap.from(el.value.querySelectorAll('.p-row'), {
     scrollTrigger: { trigger: el.value, start: 'top 75%' },
     y: 40, opacity: 0, duration: 0.7, ease: 'power2.out', stagger: 0.1
   })
 })
+
+onUnmounted(() => cancelAnimationFrame(previewRaf))
 </script>
 
 <template>
@@ -41,17 +86,39 @@ onMounted(() => {
       </div>
 
       <div class="p-list">
-        <a v-for="proj in projects" :key="proj.id" href="#" class="p-row">
+        <a
+          v-for="proj in projects"
+          :key="proj.id"
+          href="#"
+          class="p-row"
+          @mouseenter="onRowEnter(proj.thumb)"
+          @mouseleave="onRowLeave"
+          @mousemove="onRowMove"
+        >
           <span class="p-num">{{ proj.id }}</span>
           <span class="p-name">{{ proj.title }}</span>
           <span class="p-cat">{{ proj.category }}</span>
           <span class="p-type">{{ proj.type }}</span>
           <span class="p-year">{{ proj.year }}</span>
           <span class="p-arrow">&#8599;</span>
+          <!-- Process note, revealed on hover -->
+          <span class="p-note">{{ proj.note }}</span>
         </a>
       </div>
 
     </div>
+
+    <!-- Floating thumbnail preview -->
+    <Teleport to="body">
+      <div
+        class="p-preview"
+        :class="{ visible: previewVisible }"
+        :style="{ left: previewX + 'px', top: previewY + 'px' }"
+        aria-hidden="true"
+      >
+        <img :src="previewSrc" alt="" />
+      </div>
+    </Teleport>
   </section>
 </template>
 
@@ -102,6 +169,7 @@ onMounted(() => {
 .p-row {
   display: grid;
   grid-template-columns: 3.5rem 1fr auto auto auto 2rem;
+  grid-template-rows: auto auto;
   align-items: center;
   gap: 1rem;
   padding: 1.6rem 0;
@@ -122,6 +190,41 @@ onMounted(() => {
 .p-row:hover::before { width: 2px; }
 .p-row:hover .p-name { color: var(--accent); }
 .p-row:hover .p-arrow { transform: rotate(0deg); color: var(--accent); }
+.p-row:hover .p-note { max-height: 2em; opacity: 1; margin-top: 0.3rem; }
+
+/* Process note — hidden until hover */
+.p-note {
+  grid-column: 2 / -1;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--fg-dim);
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, opacity 0.3s ease, margin-top 0.3s ease;
+}
+
+/* Floating thumbnail preview */
+.p-preview {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  transform: scale(0.92) translateY(6px);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+  border: 1px solid rgba(13, 11, 8, 0.12);
+  box-shadow: 0 16px 48px rgba(13, 11, 8, 0.18);
+}
+.p-preview.visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+.p-preview img {
+  display: block;
+  width: 280px;
+  height: auto;
+}
 
 .p-num { font-family: var(--font-body); font-size: 0.62rem; letter-spacing: 0.15em; color: var(--fg-dim); }
 .p-name {

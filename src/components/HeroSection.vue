@@ -1,11 +1,42 @@
 ﻿<script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import gsap from 'gsap'
 import HeroCanvas from './HeroCanvas.vue'
 
-const heroRef = ref<HTMLElement | null>(null)
+const heroRef   = ref<HTMLElement | null>(null)
+const typedRole = ref('')
+
+const roles = ['Web Designer', 'UI Designer', 'Frontend Dev', 'Creative Coder']
+let roleIndex = 0
+let charIndex = 0
+let deleting  = false
+let typingTimer = 0
+
+function typeStep() {
+  const current = roles[roleIndex]
+  if (!deleting) {
+    charIndex++
+    typedRole.value = current.slice(0, charIndex)
+    if (charIndex === current.length) {
+      deleting = true
+      typingTimer = window.setTimeout(typeStep, 2200)
+      return
+    }
+  } else {
+    charIndex--
+    typedRole.value = current.slice(0, charIndex)
+    if (charIndex === 0) {
+      deleting = false
+      roleIndex = (roleIndex + 1) % roles.length
+    }
+  }
+  typingTimer = window.setTimeout(typeStep, deleting ? 45 : 90)
+}
 
 onMounted(() => {
+  // Start typing after entrance animation settles
+  typingTimer = window.setTimeout(typeStep, 1800)
+
   const el = heroRef.value
   if (!el) return
 
@@ -39,6 +70,8 @@ onMounted(() => {
       opacity: 0, duration: 0.5
     }, '-=0.2')
 })
+
+onUnmounted(() => clearTimeout(typingTimer))
 </script>
 
 <template>
@@ -78,7 +111,7 @@ onMounted(() => {
     <!-- Main title block -->
     <div class="h-title-block">
       <div class="clip"><h1 class="h-name">ZVOU</h1></div>
-      <div class="clip"><p class="h-serif">Web Designer</p></div>
+      <div class="clip"><p class="h-serif"><span class="h-typed">{{ typedRole }}</span><span class="h-caret" aria-hidden="true">|</span></p></div>
     </div>
 
     <!-- Rule + measurement ticks -->
@@ -263,6 +296,18 @@ onMounted(() => {
   line-height: 1;
   margin-left: 0.5rem;
   margin-top: -0.2rem;
+  min-height: 1.1em;
+}
+.h-caret {
+  display: inline-block;
+  color: var(--accent);
+  font-style: normal;
+  animation: blink 0.9s step-end infinite;
+  margin-left: 2px;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
 }
 
 /* ── Rule + ticks ── */

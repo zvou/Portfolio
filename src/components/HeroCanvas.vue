@@ -7,6 +7,8 @@ const canvasRef = ref<HTMLCanvasElement | null>(null)
 let animId = 0
 let renderer: THREE.WebGLRenderer | null = null
 let resizeFn: (() => void) | null = null
+let scrollProgress = 0
+let scrollFn: (() => void) | null = null
 
 // Neutral studio HDRI: bright sky + blazing-white horizon + near-black floor
 // No warm/cool colour accents — keeps chrome silver/white not yellow/blue
@@ -67,6 +69,10 @@ onMounted(() => {
   const camera = new THREE.PerspectiveCamera(42, W / H, 0.1, 100)
   camera.position.set(0, 0, 7)
 
+  // ── Group: all shapes move together with scroll parallax ──────
+  const group = new THREE.Group()
+  scene.add(group)
+
   // ── Chrome material — pure neutral silver ──────────────────────
   const chromeMat = new THREE.MeshStandardMaterial({
     color:           new THREE.Color(1, 1, 1),
@@ -79,25 +85,24 @@ onMounted(() => {
   const knotGeo = new THREE.TorusKnotGeometry(1.15, 0.34, 500, 128, 2, 3)
   const knot    = new THREE.Mesh(knotGeo, chromeMat)
   knot.position.set(2.1, 0.1, 0)
-  scene.add(knot)
+  group.add(knot)
 
   // ── Satellite blobs: SphereGeometry for smooth silhouette ──────
-  // SphereGeometry has uniform quad-based subdivision — no faceted poles visible
   const blobGeoA  = new THREE.SphereGeometry(0.38, 96, 64)
   const blobA     = new THREE.Mesh(blobGeoA, chromeMat)
-  scene.add(blobA)
+  group.add(blobA)
   const blobAPosA  = blobGeoA.getAttribute('position') as THREE.BufferAttribute
   const blobAOrig  = new Float32Array(blobAPosA.array)
 
   const blobGeoB  = new THREE.SphereGeometry(0.23, 80, 54)
   const blobB     = new THREE.Mesh(blobGeoB, chromeMat)
-  scene.add(blobB)
+  group.add(blobB)
   const blobAPosB  = blobGeoB.getAttribute('position') as THREE.BufferAttribute
   const blobBOrig  = new Float32Array(blobAPosB.array)
 
   const blobGeoC  = new THREE.SphereGeometry(0.14, 64, 40)
   const blobC     = new THREE.Mesh(blobGeoC, chromeMat)
-  scene.add(blobC)
+  group.add(blobC)
   const blobAPosC  = blobGeoC.getAttribute('position') as THREE.BufferAttribute
   const blobCOrig  = new Float32Array(blobAPosC.array)
 
@@ -148,10 +153,23 @@ onMounted(() => {
     attr.needsUpdate = true
   }
 
+  // ── Scroll tracker ─────────────────────────────────────────────
+  scrollFn = () => {
+    // 0 at top of page, 1 when hero is fully scrolled past
+    scrollProgress = Math.min(1, window.scrollY / (window.innerHeight * 0.85))
+  }
+  window.addEventListener('scroll', scrollFn, { passive: true })
+
   // ── Animate ────────────────────────────────────────────────────
   function animate(ms: number) {
     animId = requestAnimationFrame(animate)
     const t = ms * 0.001
+    const sp = scrollProgress
+
+    // Group parallax: drifts up + tilts slightly as page scrolls
+    group.position.y  = sp * -2.8
+    group.rotation.x  = sp *  0.3
+    group.rotation.z  = sp * -0.15
 
     // Knot: multi-axis rotation + organic non-uniform breathing
     knot.rotation.x = t * 0.10 + Math.sin(t * 0.22) * 0.14
@@ -205,7 +223,8 @@ onMounted(() => {
 
 onUnmounted(() => {
   cancelAnimationFrame(animId)
-  if (resizeFn) window.removeEventListener('resize', resizeFn)
+  if (resizeFn)   window.removeEventListener('resize', resizeFn)
+  if (scrollFn)   window.removeEventListener('scroll', scrollFn)
   renderer?.dispose()
 })
 </script>
