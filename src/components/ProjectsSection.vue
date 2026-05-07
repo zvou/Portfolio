@@ -160,7 +160,9 @@ onUnmounted(() => cancelAnimationFrame(previewRaf))
   font-weight: 400;
   text-transform: none;
   color: var(--accent);
-  font-size: 0.9em;
+  font-size: 1em;
+  position: relative;
+  top: -0.15em;
 }
 .p-sub { max-width: 320px; color: var(--fg-dim); font-size: 0.9rem; line-height: 1.7; }
 

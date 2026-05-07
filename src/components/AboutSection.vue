@@ -1,7 +1,6 @@
 ﻿<script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import gsap from 'gsap'
-import ScrollTrigger from 'gsap/ScrollTrigger'
 
 const el = ref<HTMLElement | null>(null)
 
@@ -47,13 +46,18 @@ onMounted(() => {
 
           <div class="a-body">
             <p>
-              Hey — I'm Amalie Wallenius AKA Zvou . A web designer who cares deeply about how things feel,
-              not just how they look. I work at the edge of typography, motion, and code
-              to build experiences that have real personality.
+              My name is Amalie Wallenius AKA zvou, and I am currently part of something called Digitale Talenter, 
+              where I continue to develop my skills in web development and digital design.
             </p>
             <p>
-              Whether it's a brand, a product, or an experiment — I bring an editorial
-              eye and systems thinking to every screen.
+              My interest in coding started at an early age through Neopets, 
+              an online game where users could customize layouts using HTML and CSS. 
+              Curious about how websites worked, 
+              I began experimenting with code when I was just 11 years old, and I have been passionate about web development ever since.
+            </p>
+            <p>
+              I later studied graphic design in Oslo before moving to England to study Computer Science. 
+              With a background that combines both design and development, I enjoy creating digital experiences that are fun, functional, and visually engaging.
             </p>
 
             <div class="a-stats">
@@ -143,7 +147,9 @@ onMounted(() => {
   font-weight: 400;
   text-transform: none;
   color: var(--accent);
-  font-size: 0.85em;
+  font-size: 1em;
+  position: relative;
+  top: -0.15em;
 }
 
 .a-body { display: flex; flex-direction: column; gap: 1rem; }

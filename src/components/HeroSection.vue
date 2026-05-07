@@ -100,7 +100,7 @@ onUnmounted(() => clearTimeout(typingTimer))
     <div class="h-topmeta">
       <div class="h-meta-row">
         <span class="meta-k">[ ROLE ]</span>
-        <span class="meta-v">Web Designer</span>
+        <span class="meta-v">Web Designer & Frontend Dev</span>
       </div>
       <div class="h-meta-row">
         <span class="meta-k">[ STATUS ]</span>
@@ -291,12 +291,14 @@ onUnmounted(() => clearTimeout(typingTimer))
 .h-serif {
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: clamp(3rem, 7vw, 7rem);
+  font-size: clamp(1.6rem, 4vw, 6rem);
   color: var(--fg);
-  line-height: 1;
+  line-height: 0.9;
   margin-left: 0.5rem;
-  margin-top: -0.2rem;
+  margin-top: -1rem;
   min-height: 1.1em;
+  position: relative;
+  z-index: 1;
 }
 .h-caret {
   display: inline-block;

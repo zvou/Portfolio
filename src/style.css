@@ -3,8 +3,8 @@
 
 /* ─── Custom fonts ─────────────────────────────────────────────────── */
 @font-face {
-  font-family: 'IllusionSerif';
-  src: url('/Fonts/IllusionSerif-Regular.otf') format('opentype');
+  font-family: 'Clepto';
+  src: url('/Fonts/Clepto-Regular.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -17,7 +17,7 @@
   --fg-dim:       #6e6860;
   --accent:       #2828ff;
   --font-display: 'Big Shoulders Display', sans-serif;
-  --font-serif:   'IllusionSerif', serif;
+  --font-serif:   'Clepto', serif;
   --font-body:    'Space Grotesk', sans-serif;
 }
 

@@ -6,7 +6,7 @@ import ScrollTrigger from 'gsap/ScrollTrigger'
 const el = ref<HTMLElement | null>(null)
 const form = ref({ name: '', email: '', message: '' })
 const emailCopied = ref(false)
-const EMAIL = 'hello@zvou.design'
+const EMAIL = 'amaliewallenius@outlook.com'
 
 async function copyEmail(e: MouseEvent) {
   e.preventDefault()
@@ -53,15 +53,15 @@ onMounted(() => {
             If you have a project in mind — reach out.
           </p>
           <div class="c-links">
-            <a href="mailto:hello@zvou.design" class="c-link c-link--email" @click="copyEmail">
+            <a href="mailto:amaliewallenius@outlook.com" class="c-link c-link--email" @click="copyEmail">
               <span class="c-link-label">Email</span>
-              <span class="c-link-val">{{ emailCopied ? 'Copied!' : 'hello@zvou.design' }}</span>
+              <span class="c-link-val">{{ emailCopied ? 'Copied!' : 'amaliewallenius@outlook.com' }}</span>
             </a>
-            <a href="https://linkedin.com" target="_blank" class="c-link">
+            <a href="https://linkedin.com/in/zvou/" target="_blank" class="c-link">
               <span class="c-link-label">LinkedIn</span>
-              <span class="c-link-val">zvou</span>
+              <span class="c-link-val">Amalie Wallenius / zvou</span>
             </a>
-            <a href="https://github.com" target="_blank" class="c-link">
+            <a href="https://github.com/zvou" target="_blank" class="c-link">
               <span class="c-link-label">GitHub</span>
               <span class="c-link-val">zvou</span>
             </a>

@@ -1,22 +1,21 @@
 ﻿<script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import gsap from 'gsap'
-import ScrollTrigger from 'gsap/ScrollTrigger'
 
 const el = ref<HTMLElement | null>(null)
 
 const cols = [
   {
     cat: 'Design',
-    skills: ['Visual Design', 'Typography', 'Brand Identity', 'Art Direction', 'Editorial Layout', 'Color Theory'],
+    skills: ['Affinity', 'Photoshop', 'Figma', 'Illustrator', 'InDesign', 'CSP'],
   },
   {
-    cat: 'Frontend',
-    skills: ['HTML / CSS', 'JavaScript', 'Vue.js', 'React', 'GSAP', 'Framer Motion', 'Responsive Design'],
+    cat: 'Dev',
+    skills: ['HTML / CSS', 'JavaScript', 'Vue.js', 'React', 'Python', 'SQL', 'C#'],
   },
   {
-    cat: 'Tools',
-    skills: ['Figma', 'Webflow', 'VS Code', 'Git', 'Notion', 'Lottie', 'Vite'],
+    cat: 'Others',
+    skills: ['Vite', 'Microsoft Dynamics 365', 'VS Code', 'Git', 'Obsidian', 'Magento', 'DevOps'],
   },
 ]
 
@@ -105,7 +104,7 @@ onMounted(() => {
   font-weight: 400;
   text-transform: none;
   color: var(--accent);
-  font-size: 0.9em;
+  font-size: 1em;
 }
 
 .sk-grid {
@@ -115,8 +114,6 @@ onMounted(() => {
   border-top: 1px solid rgba(13, 11, 8, 0.1);
   padding-top: 3rem;
 }
-
-.sk-col {}
 
 .sk-cat {
   font-family: var(--font-display);
