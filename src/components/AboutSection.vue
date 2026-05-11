@@ -38,9 +38,8 @@ onMounted(() => {
         <div class="a-left">
           <div class="clip">
             <h2 class="a-heading">
-              Designing at the<br />
-              <em>intersection</em><br />
-              of art &amp; code.
+              About<br />
+              <em>Me_</em><br />
             </h2>
           </div>
 

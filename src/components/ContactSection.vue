@@ -47,10 +47,10 @@ onMounted(() => {
 
         <div class="c-left">
           <div class="c-frame c-frame--tl" aria-hidden="true"></div>
-          <h2 class="c-title">Let&apos;s<br /><em>talk.</em></h2>
+          <h2 class="c-title">Contact<br /><em>Me_</em></h2>
           <p class="c-desc">
             Open to freelance, collaborations, and full-time roles.
-            If you have a project in mind — reach out.
+            If you have a project in mind, reach out.
           </p>
           <div class="c-links">
             <a href="mailto:amaliewallenius@outlook.com" class="c-link c-link--email" @click="copyEmail">
@@ -90,7 +90,7 @@ onMounted(() => {
     </div>
 
     <footer class="site-footer">
-      <span class="footer-copy">&copy; 2026 zvou</span>
+      <span class="footer-copy">&copy; 2026 zvou / Amalie Wallenius</span>
       <span class="footer-avail">
         <span class="avail-dot"></span>Available for work
       </span>

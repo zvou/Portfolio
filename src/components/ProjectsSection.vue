@@ -8,12 +8,12 @@ const el = ref<HTMLElement | null>(null)
 const projects = [
   {
     id: '01', title: 'The Arsenal',         category: 'Digital Library', type: 'Web Design',    year: '2026',
-    note: 'Built a searchable digital library with custom filtering and editorial layout.',
+    note: 'Built a digital library for Warframe fashion, inspired by Warframes 1999 update. Designed to look like a desktop.',
     thumb: 'https://placehold.co/320x200/0d0b08/f0ece5?text=The+Arsenal',
   },
   {
     id: '02', title: 'TC2026 Relay Tracker', category: 'Design System',  type: 'UI Kit',        year: '2026',
-    note: 'Designed a real-time relay race tracker with live data and responsive dashboard.',
+    note: 'Designed a real-time Warframe Tennocon relay tracker with live data and trackable loot tables.',
     thumb: 'https://placehold.co/320x200/2828ff/f0ece5?text=TC2026',
   },
   {
@@ -78,7 +78,7 @@ onUnmounted(() => cancelAnimationFrame(previewRaf))
       </div>
 
       <div class="p-header">
-        <h2 class="p-title">Selected<br /><em>Work.</em></h2>
+        <h2 class="p-title">Selected<br /><em>Projects_</em></h2>
         <div class="p-header-right">
           <p class="p-sub">A curated set of projects across branding, interfaces, and experimental web.</p>
           <div class="p-checker" aria-hidden="true"></div>

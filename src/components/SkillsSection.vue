@@ -40,7 +40,7 @@ onMounted(() => {
       </div>
 
       <div class="sk-header">
-        <h2 class="sk-title">The <em>toolkit.</em></h2>
+        <h2 class="sk-title">My <em>Skills_</em></h2>
         <div class="sk-ruler" aria-hidden="true">
           <span v-for="i in 16" :key="i" class="sk-ruler-tick"></span>
         </div>
