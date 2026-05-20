@@ -29,18 +29,7 @@ html.dark {
   --accent:#5a5aff;
 }
 
-/* Respect OS preference by default — JS toggle overrides */
-@media (prefers-color-scheme: dark) {
-  :root:not(.light) {
-    --bg:    #0e0d0b;
-    --bg2:   #181610;
-    --fg:    #f0ece5;
-    --fg-dim:#9a9288;
-    --accent:#5a5aff;
-  }
-}
-
-/* Lenis handles scroll â€” disable native smooth scroll */
+/* Lenis handles scroll — disable native smooth scroll */
 html { overflow-x: hidden; }
 
 body {

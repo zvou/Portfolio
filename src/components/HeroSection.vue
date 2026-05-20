@@ -6,7 +6,7 @@ import HeroCanvas from './HeroCanvas.vue'
 const heroRef   = ref<HTMLElement | null>(null)
 const typedRole = ref('')
 
-const roles = ['Web Designer', 'UI Designer', 'Frontend Dev', 'Creative Coder']
+const roles = ['Web Designer', 'Frontend Dev', 'Graphic Designer']
 let roleIndex = 0
 let charIndex = 0
 let deleting  = false

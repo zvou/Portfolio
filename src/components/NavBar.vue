@@ -15,8 +15,8 @@ const links = [
 function onScroll() { scrolled.value = window.scrollY > 40 }
 onMounted(() => {
   window.addEventListener('scroll', onScroll)
-  // Respect OS preference on first load
-  darkMode.value = window.matchMedia('(prefers-color-scheme: dark)').matches
+  // Always start in light mode
+  darkMode.value = false
   applyTheme()
 })
 onUnmounted(() => window.removeEventListener('scroll', onScroll))

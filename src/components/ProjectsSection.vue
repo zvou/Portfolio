@@ -7,6 +7,7 @@ const el = ref<HTMLElement | null>(null)
 interface Project {
   id: string; title: string; category: string; type: string; year: string
   note: string; thumb: string
+  href?: string
   gallery?: string[]
   description?: string
 }
@@ -20,13 +21,13 @@ const projects: Project[] = [
   {
     id: '02', title: 'Baro Relay Tracker', category: 'Loot Tracker', type: 'Web Design', year: '2026',
     note: 'Designed a real-time Warframe Tennocon relay tracker with live data and trackable loot tables.',
-    thumb: 'https://placehold.co/320x200/2828ff/f0ece5?text=TC2026',
-    description: `TC2026 is a real-time relay tracker built for Warframe's Tennocon 2026 event. The interface displays live relay population data, trackable loot tables, and mission timers — all in a dashboard designed to feel native to the Warframe universe.\n\nThe design system uses a dark, data-dense layout with colour-coded status indicators and a modular card grid. Built with vanilla JS and a custom CSS design system.`,
+    thumb: 'https://placehold.co/320x200/2828ff/f0ece5?text=Relay+Tracker',
+    description: `Baro Relay Tracker is a real-time relay tracker built for Warframe's Void Trader. The interface displays live relay population data, trackable loot tables, and mission timers — all in a dashboard designed to feel native to the Warframe universe.\n\nThe design system uses a dark, data-dense layout with colour-coded status indicators and a modular card grid. Built with vanilla JS and a custom CSS design system.`,
     gallery: [
-      'https://placehold.co/1200x750/2828ff/f0ece5?text=TC2026+Screenshot+1',
-      'https://placehold.co/1200x750/1a1aaa/f0ece5?text=TC2026+Screenshot+2',
-      'https://placehold.co/1200x750/0d0b08/2828ff?text=TC2026+Screenshot+3',
-      'https://placehold.co/1200x750/2828ff/0d0b08?text=TC2026+Screenshot+4',
+      'https://placehold.co/1200x750/2828ff/f0ece5?text=Relay+Tracker+Screenshot+1',
+      'https://placehold.co/1200x750/1a1aaa/f0ece5?text=Relay+Tracker+Screenshot+2',
+      'https://placehold.co/1200x750/0d0b08/2828ff?text=Relay+Tracker+Screenshot+3',
+      'https://placehold.co/1200x750/2828ff/0d0b08?text=Relay+Tracker+Screenshot+4',
     ],
   },
   {
@@ -38,6 +39,7 @@ const projects: Project[] = [
     id: '04', title: 'Pokédex', category: 'Digital Library', type: 'Web Design', year: '2026',
     note: 'A simple Pokedex that includes the first 151 Pokemon, built with JS and a public API. Features search and filter functionality.',
     thumb: 'https://placehold.co/320x200/2828ff/f0ece5?text=Pokedex',
+    href: 'https://zvou.github.io/Pokedex/',
   },
 ]
 
@@ -129,13 +131,15 @@ onUnmounted(() => cancelAnimationFrame(previewRaf))
         <a
           v-for="proj in projects"
           :key="proj.id"
-          href="#"
+          :href="proj.href ?? '#'"
+          :target="proj.href ? '_blank' : undefined"
+          :rel="proj.href ? 'noopener noreferrer' : undefined"
           class="p-row"
           :class="{ 'has-gallery': proj.gallery }"
           @mouseenter="onRowEnter(proj.thumb)"
           @mouseleave="onRowLeave"
           @mousemove="onRowMove"
-          @click="proj.gallery ? openGallery(proj, $event) : $event.preventDefault()"
+          @click="proj.gallery ? openGallery(proj, $event) : (!proj.href && $event.preventDefault())"
         >
           <span class="p-num">{{ proj.id }}</span>
           <span class="p-name">{{ proj.title }}</span>
