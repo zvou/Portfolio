@@ -45,7 +45,7 @@ onMounted(() => {
   background: var(--fg);
   border-radius: 50%;
   pointer-events: none;
-  z-index: 9999;
+  z-index: 99999;
   will-change: transform;
 }
 .c-ring {
@@ -55,7 +55,7 @@ onMounted(() => {
   border: 1.5px solid rgba(13, 11, 8, 0.5);
   border-radius: 50%;
   pointer-events: none;
-  z-index: 9998;
+  z-index: 99998;
   will-change: transform;
   transition: width 0.25s, height 0.25s, border-color 0.25s;
 }

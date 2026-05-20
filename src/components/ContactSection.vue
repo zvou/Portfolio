@@ -4,7 +4,6 @@ import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 
 const el = ref<HTMLElement | null>(null)
-const form = ref({ name: '', email: '', message: '' })
 const emailCopied = ref(false)
 const EMAIL = 'amaliewallenius@outlook.com'
 
@@ -17,10 +16,6 @@ async function copyEmail(e: MouseEvent) {
   } catch {
     window.location.href = `mailto:${EMAIL}`
   }
-}
-
-function submit() {
-  // placeholder
 }
 
 onMounted(() => {
@@ -49,8 +44,7 @@ onMounted(() => {
           <div class="c-frame c-frame--tl" aria-hidden="true"></div>
           <h2 class="c-title">Contact<br /><em>Me_</em></h2>
           <p class="c-desc">
-            Open to freelance, collaborations, and full-time roles.
-            If you have a project in mind, reach out.
+            Open to work. Reach out if you have any questions.
           </p>
           <div class="c-links">
             <a href="mailto:amaliewallenius@outlook.com" class="c-link c-link--email" @click="copyEmail">
@@ -68,22 +62,35 @@ onMounted(() => {
           </div>
         </div>
 
-        <div class="c-form-wrap">
-          <form class="c-form" @submit.prevent="submit">
-            <div class="c-field">
-              <label>Name</label>
-              <input v-model="form.name" type="text" placeholder="Your name" autocomplete="off" />
-            </div>
-            <div class="c-field">
-              <label>Email</label>
-              <input v-model="form.email" type="email" placeholder="your@email.com" autocomplete="off" />
-            </div>
-            <div class="c-field">
-              <label>Message</label>
-              <textarea v-model="form.message" rows="5" placeholder="Tell me about your project"></textarea>
-            </div>
-            <button type="submit" class="btn-fill">Send message ↗</button>
-          </form>
+        <!-- ASCII art panel -->
+        <div class="c-ascii" aria-hidden="true">
+          <pre class="c-ascii-art">
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠤⢠⢠⢀⣄⠤⠄⢴⢂⠢⣀⠠⡀⡀⡀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⠂⠉⡀⠄⠂⠈⠀⠈⠀⠈⠈⠈⠈⠈⠈⠀⠙⠀⠒⠲⢀⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⡀⡀⠀⠀⣘⢻⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠠⠊⠀⠠⠤⠠⠺⢺⠸⠷⠢⠤⣐⠀⠠⠀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⠊⠀⠀⠀⣀⡀⣽⣢⢃⣽⣩⣤⣄⣤⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣤⣶⣺⠿⠫⠚⢻⠛⠉⠝⠛⠹⡗⣿⢛⣳⣞⠛⡶⡴⣄⠀⣀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⢀⠴⣿⣧⠻⠃⠀⠀⠀⠀⢁⢇⠀⠀⠀⠀⠘⢽⡀⢰⡃⠀⠀⠐⠓⠪⢬⢥⡞⠞⠗⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠋⢠⢟⠋⠨⠀⠀⠀⠀⠀⠀⢱⣃⠀⠀⠀⠀⠸⠳⣧⠂⠀⠀⠀⢀⡃⠀⠀⠑⣿⣖⣤⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⣐⢼⢉⡈⠀⠀⠀⠀⠀⠀⠀⠀⠖⢲⠀⠀⠀⠀⠀⠨⠁⠀⠀⠀⣾⡅⠀⠀⠀⠀⢽⣿⡷⠐⠚⠋⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⢀⡌⡿⠉⠸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⡰⠅⠕⠕⠫⠫⠟⢊⡕⠃⢼⠆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠒⠒⠶⢢⡤⠄⠀⠀⠀⠀⠈⠁⠉⠉⠁⠈⠈⠈⠈⠀⣰⡿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠋⢑⠓⠂⠠⠀⢀⠀⠀⠀⢀⡤⡾⠹⡅⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠀⢁⢎⡉⠉⠙⠓⠋⢡⡅⠀⣀⡹⢧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡾⠋⠉⠐⠤⢄⡀⠝⢤⣿⠚⠛⠁⠀⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠁⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+          </pre>
         </div>
 
       </div>
@@ -171,6 +178,23 @@ onMounted(() => {
 .c-link-label { font-family: var(--font-body); font-size: 0.68rem; letter-spacing: 0.15em; color: var(--fg-dim); }
 .c-link-val { font-family: var(--font-body); font-size: 0.88rem; color: var(--fg); transition: color 0.2s; }
 .c-link--email .c-link-val { transition: color 0.2s, opacity 0.15s; }
+
+.c-ascii {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 2rem;
+}
+.c-ascii-art {
+  font-family: var(--font-serif);
+  font-size: clamp(0.5rem, 0.85vw, 0.78rem);
+  line-height: 1.55;
+  color: var(--accent);
+  white-space: pre;
+  user-select: none;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
 
 .c-form { display: flex; flex-direction: column; gap: 1.5rem; }
 

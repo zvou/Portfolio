@@ -25,7 +25,7 @@ onMounted(() => {
     <HeroSection />
     <MarqueeTicker />
     <AboutSection />
-    <MarqueeTicker :items="['PROJECTS', 'SELECTED WORK', 'CASE STUDIES', 'ZVOU', 'WEB DESIGN', '2026']" />
+    <MarqueeTicker :items="['PROJECTS', 'SELECTED WORK', 'WIP', 'APPS', 'WEB DESIGN', '2026']" />
     <ProjectsSection />
     <SkillsSection />
     <ContactSection />

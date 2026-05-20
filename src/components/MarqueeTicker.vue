@@ -1,20 +1,23 @@
 ﻿<script setup lang="ts">
-defineProps<{ items?: string[] }>()
+import { computed } from 'vue'
+
+const props = defineProps<{ items?: string[] }>()
 const defaultItems = [
-  'AVAILABLE FOR WORK',
-  'WEB DESIGN',
-  'UI / UX',
-  'TYPOGRAPHY',
-  'ZVOU',
+  '***',
+  '---',
+  '0101',
+  '###',
+  'XXX',
   '2026',
 ]
+const arr = computed(() => props.items ?? defaultItems)
 </script>
 
 <template>
   <div class="marquee-wrap" aria-hidden="true">
     <div class="marquee-track">
-      <span v-for="(item, i) in [...(items ?? defaultItems), ...(items ?? defaultItems)]" :key="i" class="marquee-item">
-        {{ item }}<span class="sep">âœ¦</span>
+      <span v-for="(item, i) in [...arr, ...arr, ...arr, ...arr, ...arr, ...arr]" :key="i" class="marquee-item">
+        {{ item }}<span class="sep">၊၊||၊</span>
       </span>
     </div>
   </div>
@@ -41,7 +44,7 @@ const defaultItems = [
 .marquee-track {
   display: flex;
   white-space: nowrap;
-  animation: marquee 22s linear infinite;
+  animation: marquee 60s linear infinite;
   width: max-content;
 }
 
