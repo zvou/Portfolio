@@ -30,6 +30,12 @@ onMounted(() => {
 
 <template>
   <section id="skills" class="skills" ref="el">
+
+    <!-- Ghost stroke word -->
+    <span class="sk-ghost-word" aria-hidden="true">SKILLS</span>
+    <!-- Ghost section number -->
+    <span class="sk-ghost-num" aria-hidden="true">03</span>
+
     <div class="sk-inner">
 
       <div class="sk-label-row">
@@ -66,6 +72,7 @@ onMounted(() => {
   position: relative;
   padding: 8rem 5vw;
   background: transparent;
+  isolation: isolate;
 }
 .sk-inner { max-width: 1200px; margin: 0 auto; }
 
@@ -150,6 +157,41 @@ onMounted(() => {
 @media (max-width: 768px) {
   .skills { padding: 5rem 1.5rem; }
   .sk-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .sk-ghost-word, .sk-ghost-num { display: none; }
 }
+
+/* ── Ghost deco ── */
+.sk-ghost-word {
+  position: absolute;
+  top: 3rem;
+  left: -2vw;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(5rem, 12vw, 12rem);
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--fg) 7%, transparent);
+  pointer-events: none;
+  z-index: -1;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  user-select: none;
+  text-transform: uppercase;
+}
+.sk-ghost-num {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(8rem, 18vw, 18rem);
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--fg) 5%, transparent);
+  pointer-events: none;
+  z-index: -1;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  user-select: none;
+}
+
 </style>
 

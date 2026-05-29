@@ -17,6 +17,12 @@ const projects: Project[] = [
     id: '01', title: 'The Arsenal [WIP]', category: 'Digital Library', type: 'Web Design', year: '2026',
     note: 'Built a digital library for Warframe fashion, inspired by Warframes 1999 update. Designed to look like a desktop.',
     thumb: 'https://placehold.co/320x200/0d0b08/f0ece5?text=The+Arsenal',
+    description: `The Arsenal is a digital fashion library for Warframe, inspired by the game's 1999 aesthetic. The interface mimics a retro desktop OS — complete with window chrome, icon grids, and a catalogued item database.\n\nThe project focuses on browsable fashion loadouts, outfit tagging, and community submissions. Designed in Figma and built with Vue 3.`,
+    gallery: [
+      'https://placehold.co/1200x750/0d0b08/f0ece5?text=Arsenal+Screenshot+1',
+      'https://placehold.co/1200x750/1a1410/f0ece5?text=Arsenal+Screenshot+2',
+      'https://placehold.co/1200x750/0d0b08/2828ff?text=Arsenal+Screenshot+3',
+    ],
   },
   {
     id: '02', title: 'Baro Relay Tracker', category: 'Loot Tracker', type: 'Web Design', year: '2026',
@@ -34,6 +40,12 @@ const projects: Project[] = [
     id: '03', title: 'Diagnostics Tool [WIP]', category: 'Diagnostics Tool', type: 'App', year: '2026',
     note: 'Created an interactive diagnostics tool with smooth page transitions and data visualization.',
     thumb: 'https://placehold.co/320x200/0d0b08/f0ece5?text=Diagnostics+Tool',
+    description: `The Diagnostics Tool is an interactive application for visualising system health data. Features include animated data charts, a status panel with colour-coded severity levels, and smooth page transitions between diagnostic views.\n\nBuilt with Vue 3 and GSAP, with a focus on clarity and legibility under pressure — designed around the idea that diagnostics should feel calm, not chaotic.`,
+    gallery: [
+      'https://placehold.co/1200x750/0d0b08/f0ece5?text=Diagnostics+Screenshot+1',
+      'https://placehold.co/1200x750/0a0d0a/5aff5a?text=Diagnostics+Screenshot+2',
+      'https://placehold.co/1200x750/0d0b08/ff5a5a?text=Diagnostics+Screenshot+3',
+    ],
   },
   {
     id: '04', title: 'Pokédex', category: 'Digital Library', type: 'Web Design', year: '2026',
@@ -110,6 +122,19 @@ onUnmounted(() => cancelAnimationFrame(previewRaf))
 
 <template>
   <section id="projects" class="projects" ref="el">
+
+    <!-- Ghost stroke word -->
+    <span class="p-ghost-word" aria-hidden="true">WORK</span>
+    <!-- Ghost section number -->
+    <span class="p-ghost-num" aria-hidden="true">02</span>
+    <!-- Registration marks -->
+    <div class="p-reg p-reg--tr" aria-hidden="true">
+      <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="5.5" stroke="currentColor" stroke-width="0.6"/><line x1="10" y1="0" x2="10" y2="20" stroke="currentColor" stroke-width="0.6"/><line x1="0" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="0.6"/></svg>
+    </div>
+    <div class="p-reg p-reg--bl" aria-hidden="true">
+      <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="5.5" stroke="currentColor" stroke-width="0.6"/><line x1="10" y1="0" x2="10" y2="20" stroke="currentColor" stroke-width="0.6"/><line x1="0" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="0.6"/></svg>
+    </div>
+
     <div class="p-inner">
 
       <div class="p-label-row">
@@ -232,6 +257,7 @@ onUnmounted(() => cancelAnimationFrame(previewRaf))
   position: relative;
   padding: 8rem 5vw;
   background: transparent;
+  isolation: isolate;
 }
 .p-inner { max-width: 1200px; margin: 0 auto; }
 
@@ -302,8 +328,8 @@ onUnmounted(() => cancelAnimationFrame(previewRaf))
 /* Process note — hidden until hover */
 .p-note {
   grid-column: 2 / -1;
-  font-family: var(--font-serif);
-  font-style: italic;
+  font-family: var(--font-body);
+  font-style: normal;
   font-size: 0.85rem;
   color: var(--fg-dim);
   max-height: 0;
@@ -320,8 +346,7 @@ onUnmounted(() => cancelAnimationFrame(previewRaf))
   opacity: 0;
   transform: scale(0.92) translateY(6px);
   transition: opacity 0.22s ease, transform 0.22s ease;
-  border: 1px solid rgba(13, 11, 8, 0.12);
-  box-shadow: 0 16px 48px rgba(13, 11, 8, 0.18);
+  border: 1px solid color-mix(in srgb, var(--fg) 10%, transparent);
 }
 .p-preview.visible {
   opacity: 1;
@@ -483,6 +508,51 @@ onUnmounted(() => cancelAnimationFrame(previewRaf))
   white-space: pre-line;
 }
 
+/* ── Ghost deco ── */
+.p-ghost-word {
+  position: absolute;
+  bottom: 0;
+  right: -1vw;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(8rem, 18vw, 18rem);
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--fg) 8%, transparent);
+  pointer-events: none;
+  z-index: -1;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  user-select: none;
+  text-transform: uppercase;
+}
+.p-ghost-num {
+  position: absolute;
+  top: 2rem;
+  left: -1vw;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(8rem, 16vw, 16rem);
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--fg) 6%, transparent);
+  pointer-events: none;
+  z-index: -1;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  user-select: none;
+}
+.p-reg {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  color: var(--fg);
+  opacity: 0.15;
+  z-index: 2;
+  pointer-events: none;
+}
+.p-reg svg { width: 100%; height: 100%; }
+.p-reg--tr { top: 1.5rem; right: 1.5rem; }
+.p-reg--bl { bottom: 1.5rem; left: 1.5rem; }
+
 @media (max-width: 768px) {
   .projects { padding: 5rem 1.5rem; }
   .p-row { grid-template-columns: 2.5rem 1fr 1.5rem; }
@@ -493,6 +563,7 @@ onUnmounted(() => cancelAnimationFrame(previewRaf))
   .gal-stage { border-right: none; border-bottom: 1px solid rgba(13,11,8,0.1); }
   .gal-overlay { padding: 0; align-items: flex-end; }
   .gal-modal { max-height: 95vh; }
+  .p-ghost-word, .p-ghost-num, .p-reg { display: none; }
 }
 </style>
 

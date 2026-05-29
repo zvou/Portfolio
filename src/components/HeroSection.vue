@@ -138,6 +138,36 @@ onUnmounted(() => clearTimeout(typingTimer))
       </div>
     </div>
 
+    <!-- ── Ambient decorative overlays ── -->
+
+    <!-- Right-side system log -->
+
+
+    <!-- Large ghost numbers -->
+    <span class="h-num h-num--1" aria-hidden="true">138</span>
+    <span class="h-num h-num--2" aria-hidden="true">065</span>
+    <span class="h-num h-num--3" aria-hidden="true">///</span>
+
+    <!-- Plus / star column -->
+    <div class="h-plusmarks" aria-hidden="true">
+      <span>+</span><span>★</span><span>+</span><span>★</span><span>+</span>
+    </div>
+
+    <!-- © Corp cluster -->
+    <div class="h-corp" aria-hidden="true">
+      <span>© ZVOU CORP. 2026</span>
+      <span>CE ∂ AMP · WD SYSTEMS</span>
+      <span>REF-2026-001 ◈ CERTIFIED</span>
+    </div>
+
+    <!-- Registration marks -->
+    <div class="h-reg h-reg--tr" aria-hidden="true">
+      <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="5.5" stroke="currentColor" stroke-width="0.6"/><line x1="10" y1="0" x2="10" y2="20" stroke="currentColor" stroke-width="0.6"/><line x1="0" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="0.6"/></svg>
+    </div>
+    <div class="h-reg h-reg--bl" aria-hidden="true">
+      <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="5.5" stroke="currentColor" stroke-width="0.6"/><line x1="10" y1="0" x2="10" y2="20" stroke="currentColor" stroke-width="0.6"/><line x1="0" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="0.6"/></svg>
+    </div>
+
     <!-- Floating ambient markers -->
     <span class="h-float h-float--1" aria-hidden="true">✦</span>
     <span class="h-float h-float--2" aria-hidden="true">{+}</span>
@@ -171,9 +201,9 @@ onUnmounted(() => clearTimeout(typingTimer))
   background: linear-gradient(
     to right,
     var(--bg) 0%,
-    var(--bg) 28%,
-    rgba(240, 236, 229, 0.75) 52%,
-    transparent 72%
+    var(--bg) 22%,
+    color-mix(in srgb, var(--bg) 60%, transparent) 38%,
+    transparent 52%
   );
   z-index: 1;
   pointer-events: none;
@@ -511,6 +541,96 @@ onUnmounted(() => clearTimeout(typingTimer))
   100% { transform: translateY(300%); }
 }
 
+/* ── Ambient decorative overlays ── */
+.h-syslog {
+  position: absolute;
+  right: 1.2rem;
+  top: 50%;
+  transform: translateY(-50%) rotate(90deg);
+  transform-origin: center center;
+  display: flex;
+  flex-direction: row;
+  gap: 1.4rem;
+  z-index: 2;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.h-syslog span {
+  font-family: var(--font-body);
+  font-size: 0.42rem;
+  letter-spacing: 0.14em;
+  color: var(--fg);
+  opacity: 0.28;
+  text-transform: uppercase;
+  display: block;
+}
+
+.h-num {
+  position: absolute;
+  font-family: var(--font-display);
+  font-weight: 900;
+  color: var(--fg);
+  pointer-events: none;
+  z-index: 1;
+  letter-spacing: -0.02em;
+}
+.h-num--1 { font-size: 2.8rem; top: 9%;    right: 3%;  opacity: 0.07; }
+.h-num--2 { font-size: 1.7rem; bottom: 20%; right: 20%; opacity: 0.08; }
+.h-num--3 { font-size: 1.1rem; bottom: 27%; right: 14%; opacity: 0.11; letter-spacing: 0.12em; }
+
+.h-plusmarks {
+  position: absolute;
+  top: 33%;
+  right: 2.2%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  z-index: 2;
+  pointer-events: none;
+}
+.h-plusmarks span {
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  color: var(--fg);
+  opacity: 0.15;
+  display: block;
+}
+
+/* ── Corp cluster ── */
+.h-corp {
+  position: absolute;
+  bottom: 6rem;
+  left: 5vw;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  z-index: 2;
+  pointer-events: none;
+}
+.h-corp span {
+  font-family: var(--font-body);
+  font-size: 0.38rem;
+  letter-spacing: 0.14em;
+  color: var(--fg);
+  opacity: 0.2;
+  text-transform: uppercase;
+}
+
+/* ── Registration marks ── */
+.h-reg {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  color: var(--fg);
+  opacity: 0.18;
+  z-index: 3;
+  pointer-events: none;
+}
+.h-reg svg { width: 100%; height: 100%; }
+.h-reg--tr { top: 1.4rem; right: calc(5vw + 2.6rem); }
+.h-reg--bl { bottom: 1.4rem; left: 4.5vw; }
+
+
 @media (max-width: 768px) {
   .hero { padding: 7rem 1.5rem 4rem 1.5rem; }
   .h-ci { display: none; }
@@ -518,6 +638,7 @@ onUnmounted(() => clearTimeout(typingTimer))
   .h-checker { display: none; }
   .h-float { display: none; }
   .h-scroll { display: none; }
+  .h-warn, .h-scatter, .h-schema, .h-num, .h-plusmarks, .h-reticle, .h-syslog, .h-corp, .h-reg { display: none; }
   .h-bottom { flex-direction: column; gap: 1.5rem; }
 }
 </style>

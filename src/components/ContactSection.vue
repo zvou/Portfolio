@@ -29,6 +29,12 @@ onMounted(() => {
 
 <template>
   <section id="contact" class="contact" ref="el">
+
+    <!-- Ghost stroke word -->
+    <span class="c-ghost-word" aria-hidden="true">CONTACT</span>
+    <!-- Ghost section number -->
+    <span class="c-ghost-num" aria-hidden="true">04</span>
+
     <div class="c-inner">
 
       <div class="c-label-row">
@@ -110,6 +116,7 @@ onMounted(() => {
   position: relative;
   padding: 8rem 5vw 0;
   background: transparent;
+  isolation: isolate;
 }
 .c-inner { max-width: 1200px; margin: 0 auto; }
 
@@ -280,6 +287,53 @@ onMounted(() => {
   .contact { padding: 5rem 1.5rem 0; }
   .c-grid { grid-template-columns: 1fr; gap: 3rem; }
   .site-footer { margin-top: 4rem; }
+  .c-ghost-word, .c-ghost-num, .c-pgrid { display: none; }
 }
+
+/* ── Ghost deco ── */
+.c-ghost-word {
+  position: absolute;
+  bottom: 4rem;
+  right: -1vw;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(7rem, 16vw, 16rem);
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--fg) 7%, transparent);
+  pointer-events: none;
+  z-index: -1;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  user-select: none;
+  text-transform: uppercase;
+}
+.c-ghost-num {
+  position: absolute;
+  top: 1rem;
+  left: -1vw;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(8rem, 18vw, 18rem);
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--fg) 5%, transparent);
+  pointer-events: none;
+  z-index: -1;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  user-select: none;
+}
+.c-pgrid {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 55%;
+  color: var(--fg);
+  opacity: 0.06;
+  z-index: 0;
+  pointer-events: none;
+}
+
 </style>
 

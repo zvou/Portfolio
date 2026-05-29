@@ -26,17 +26,10 @@ const arr = computed(() => props.items ?? defaultItems)
 <style scoped>
 .marquee-wrap {
   overflow: hidden;
-  border-top: none;
-  border-bottom: none;
   padding: 1rem 0;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    var(--bg2) 35%,
-    var(--bg2) 65%,
-    transparent 100%
-  );
-  margin: -2rem 0;
+  background: var(--bg);
+  border-top: 1px solid color-mix(in srgb, var(--fg) 18%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--fg) 18%, transparent);
   position: relative;
   z-index: 1;
 }

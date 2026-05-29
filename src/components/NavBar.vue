@@ -1,9 +1,9 @@
 ﻿<script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 
-const scrolled  = ref(false)
-const menuOpen  = ref(false)
-const darkMode  = ref(false)
+const scrolled = ref(false)
+const menuOpen = ref(false)
+const darkMode = ref(false)
 
 const links = [
   { label: 'About',    href: '#about' },
@@ -13,13 +13,37 @@ const links = [
 ]
 
 function onScroll() { scrolled.value = window.scrollY > 40 }
+
+let mq: MediaQueryList
+function onSystemChange(e: MediaQueryListEvent) {
+  darkMode.value = e.matches
+  applyTheme()
+}
+
 onMounted(() => {
   window.addEventListener('scroll', onScroll)
-  // Always start in light mode
-  darkMode.value = false
+  mq = window.matchMedia('(prefers-color-scheme: dark)')
+  darkMode.value = mq.matches
   applyTheme()
+  mq.addEventListener('change', onSystemChange)
 })
-onUnmounted(() => window.removeEventListener('scroll', onScroll))
+onUnmounted(() => {
+  window.removeEventListener('scroll', onScroll)
+  mq?.removeEventListener('change', onSystemChange)
+})
+
+function smoothScroll(e: MouseEvent, href: string) {
+  e.preventDefault()
+  menuOpen.value = false
+  const target = document.querySelector(href)
+  if (!target) return
+  const lenis = (window as any).__lenis
+  if (lenis) {
+    lenis.scrollTo(target, { duration: 1.6, easing: (t: number) => 1 - Math.pow(1 - t, 4) })
+  } else {
+    target.scrollIntoView({ behavior: 'smooth' })
+  }
+}
 
 function closeMenu() { menuOpen.value = false }
 
@@ -28,8 +52,7 @@ function toggleDark() {
   applyTheme()
 }
 function applyTheme() {
-  document.documentElement.classList.toggle('dark',  darkMode.value)
-  document.documentElement.classList.toggle('light', !darkMode.value)
+  document.documentElement.classList.toggle('dark', darkMode.value)
 }
 </script>
 
@@ -38,7 +61,7 @@ function applyTheme() {
     <a href="#hero" class="logo">zvou<span class="dot">.</span></a>
 
     <nav class="links">
-      <a v-for="l in links" :key="l.href" :href="l.href">{{ l.label }}</a>
+      <a v-for="l in links" :key="l.href" :href="l.href" @click="smoothScroll($event, l.href)">{{ l.label }}</a>
     </nav>
 
     <button class="theme-toggle" @click="toggleDark" :aria-label="darkMode ? 'Switch to light mode' : 'Switch to dark mode'">
@@ -51,7 +74,7 @@ function applyTheme() {
     </button>
 
     <div class="mobile-menu" :class="{ open: menuOpen }">
-      <a v-for="l in links" :key="l.href" :href="l.href" @click="closeMenu">{{ l.label }}</a>
+      <a v-for="l in links" :key="l.href" :href="l.href" @click="smoothScroll($event, l.href)">{{ l.label }}</a>
     </div>
   </header>
 </template>
@@ -65,12 +88,13 @@ function applyTheme() {
   align-items: center;
   justify-content: space-between;
   padding: 1.4rem 5vw;
+  background: linear-gradient(to bottom, color-mix(in srgb, var(--bg) 50%, transparent), transparent);
   transition: background 0.3s, border-bottom 0.3s;
 }
 .nav.scrolled {
-  background: rgba(240, 236, 229, 0.92);
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(13, 11, 8, 0.08);
+  border-bottom: 1px solid color-mix(in srgb, var(--fg) 8%, transparent);
 }
 
 .logo {
@@ -97,7 +121,7 @@ function applyTheme() {
 
 .theme-toggle {
   background: none;
-  border: 1px solid rgba(13, 11, 8, 0.15);
+  border: 1px solid color-mix(in srgb, var(--fg) 18%, transparent);
   color: var(--fg-dim);
   font-size: 1rem;
   width: 2rem;

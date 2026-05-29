@@ -53,6 +53,22 @@ a { color: inherit; text-decoration: none; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--accent); }
 
+/* Light mode: subtle section separators */
+html:not(.dark) section {
+  border-bottom: 1px solid color-mix(in srgb, var(--fg) 20%, transparent);
+}
+
+/* Light mode: ghost background text — boost stroke so it's visible on cream */
+html:not(.dark) .sk-ghost-word,
+html:not(.dark) .sk-ghost-num,
+html:not(.dark) .a-ghost-num,
+html:not(.dark) .p-ghost-word,
+html:not(.dark) .p-ghost-num,
+html:not(.dark) .c-ghost-word,
+html:not(.dark) .c-ghost-num {
+  -webkit-text-stroke: 2px rgba(13, 11, 8, 0.10);
+}
+
 /* â”€â”€â”€ Shared section helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .section-num {
   font-family: var(--font-body);
