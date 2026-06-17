@@ -63,18 +63,13 @@ onMounted(() => {
 
           <div class="a-body">
             <p>
-              My name is Amalie Wallenius AKA zvou, and I am currently part of something called Digitale Talenter, 
-              where I continue to develop my skills in web development and digital design.
+              I'm Amalie, also known as zvou. Right now I'm doing Digitale Talenter, which is basically where I dive deeper into web development and design.
             </p>
             <p>
-              My interest in coding started at an early age through Neopets, 
-              an online game where users could customize layouts using HTML and CSS. 
-              Curious about how websites worked, 
-              I began experimenting with code when I was just 11 years old, and I have been passionate about web development ever since.
+              I got into coding through Neopets when I was 11 years old. There was this thing where you could customize your pet's page with HTML and CSS, so naturally I started messing around with it. That got me hooked on how websites work, and here we are.
             </p>
             <p>
-              I later studied graphic design in Oslo before moving to England to study Computer Science. 
-              With a background that combines both design and development, I enjoy creating digital experiences that are fun, functional, and visually engaging.
+              I studied graphic design in Oslo for a bit, then moved to England to study Computer Science. I like combining both sides, so I end up building things that look good and actually work well.
             </p>
 
             <div class="a-stats">

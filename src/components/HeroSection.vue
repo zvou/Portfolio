@@ -124,7 +124,7 @@ onUnmounted(() => clearTimeout(typingTimer))
     <div class="h-bottom">
       <div class="h-bottom-left">
         <p class="h-desc">
-          Crafting digital experiences<br />that feel alive on screen.
+          I make things on the web.<br />They usually work pretty well.
         </p>
         <!-- Barcode decoration -->
         <div class="h-barcode" aria-hidden="true">

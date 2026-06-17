@@ -3,11 +3,11 @@ import { computed } from 'vue'
 
 const props = defineProps<{ items?: string[] }>()
 const defaultItems = [
-  '***',
-  '---',
-  '0101',
-  '###',
-  'XXX',
+  'PROJECTS',
+  'WORK',
+  'DIGITAL',
+  'ARCHIVE',
+  'PORTFOLIO',
   '2026',
 ]
 const arr = computed(() => props.items ?? defaultItems)
