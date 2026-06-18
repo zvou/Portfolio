@@ -63,7 +63,7 @@ onMounted(() => {
 
           <div class="a-body">
             <p>
-              I'm Amalie, also known as zvou. Right now I'm doing Digitale Talenter, which is basically where I dive deeper into web development and design.
+              I'm Amalie Wallenius, also known as zvou online. Right now I'm doing Digitale Talenter, which is basically where I dive deeper into web development and design.
             </p>
             <p>
               I got into coding through Neopets when I was 11 years old. There was this thing where you could customize your pet's page with HTML and CSS, so naturally I started messing around with it. That got me hooked on how websites work, and here we are.

@@ -16,10 +16,10 @@ const projects: Project[] = [
   {
     id: '01', title: 'The Arsenal [WIP]', category: 'Digital Library', type: 'Web Design', year: '2026',
     note: 'Built a digital library for Warframe fashion, inspired by Warframes 1999 update. Designed to look like a desktop.',
-    thumb: 'https://placehold.co/320x200/0d0b08/f0ece5?text=The+Arsenal',
+    thumb: `${import.meta.env.BASE_URL}Photos/ArsenalSC1.png`,
     description: `The Arsenal is a desktop-style fashion archive for Warframe. Built with React + TypeScript, it mimics a retro operating system interface where players can browse, catalog, and organize character fashion looks.\n\nFeatures include a draggable windowed interface with folders for browsing Operator, Drifter, and Warframe fashion loadouts, a searchable look browser, wallpaper selector, and a media player. The project emphasizes retro aesthetic through pixel-perfect UI, custom interactions, and OS-like window management, creating a unique way to explore character fashion outside the game.`,
     gallery: [
-      'https://placehold.co/1200x750/0d0b08/f0ece5?text=Arsenal+Screenshot+1',
+      `${import.meta.env.BASE_URL}Photos/ArsenalSC1.png`,
       'https://placehold.co/1200x750/1a1410/f0ece5?text=Arsenal+Screenshot+2',
       'https://placehold.co/1200x750/0d0b08/2828ff?text=Arsenal+Screenshot+3',
     ],
@@ -27,31 +27,27 @@ const projects: Project[] = [
   {
     id: '02', title: 'Baro Relay Tracker', category: 'Loot Tracker', type: 'Web Design', year: '2026',
     note: 'Designed a real-time Warframe Tennocon relay tracker with live data and trackable loot tables.',
-    thumb: 'https://placehold.co/320x200/2828ff/f0ece5?text=Relay+Tracker',
+    thumb: `${import.meta.env.BASE_URL}Photos/BaroSC1.png`,
     description: `A personal portfolio project built to track Baro Ki'Teer, the Void Trader in the videogame Warframe. Baro visits a random relay every two weeks carrying a rotating selection of exclusive items.\n\nThis tool helps players plan, track, and wishlist items across every visit, with special focus on the TennoCon 2026 event where Baro historically returns every item he has ever sold.\n\nFeatures:\n- Live Baro tab fetches the current Baro inventory in real time via the warframestat.us community API (with a DE worldstate fallback).\n- All Items catalog is a persistent, growing historical catalog of every item Baro has ever brought. Automatically updated each time Baro visits while the backend is running.\n- TennoCon 2026 tab displays the full catalog as a pre-event planning list. During the TennoCon event window (July 11-18 2026), switches to the live TennoCon inventory.\n- Wishlist: Star any item to mark it as wanted. Persists across sessions via localStorage.\n- Mark Acquired: Track which items you've already purchased. Bought items are visually dimmed with an overlay.\n- Search, filter & sort: Search by name, filter by status (wishlisted / not acquired), filter by category (Mods, Appearance, Weapons, Misc), and sort by name or price.\n- Stats panel shows at-a-glance counts for total items, wishlisted items, acquired items, and remaining.\n- Countdown timer provides live countdown to the next Baro arrival or departure, and a dedicated TennoCon countdown.`,
     gallery: [
       `${import.meta.env.BASE_URL}Videos/relay-tracker-preview.mp4`,
-      'https://placehold.co/1200x750/2828ff/f0ece5?text=Relay+Tracker+Screenshot+1',
-      'https://placehold.co/1200x750/1a1aaa/f0ece5?text=Relay+Tracker+Screenshot+2',
-      'https://placehold.co/1200x750/0d0b08/2828ff?text=Relay+Tracker+Screenshot+3',
-      'https://placehold.co/1200x750/2828ff/0d0b08?text=Relay+Tracker+Screenshot+4',
     ],
   },
   {
     id: '04', title: 'Diagnostics Tool [WIP]', category: 'Desktop Application', type: 'App', year: '2026',
     note: 'Created an interactive diagnostics tool with smooth page transitions and data visualization.',
-    thumb: 'https://placehold.co/320x200/0d0b08/f0ece5?text=Diagnostics+Tool',
+    thumb: `${import.meta.env.BASE_URL}Photos/DiagSC1.png`,
     description: `GameDiag is a Windows-first game performance diagnostics tool. It finds the most likely cause of FPS drops, stutter, and lag and tells you exactly what to fix.\n\nEvery scan produces ranked findings with severity, confidence, and actionable fixes. It checks CPU core count, GPU drivers and VRAM, RAM availability, storage space, power plans, background apps, frame-time data, game settings, network latency, and OS health.\n\nYou can run it via desktop UI, web dashboard, CLI, or system tray background monitor. It supports live frame-time capture with PresentMon, analyzes existing CSV data from capture tools, or processes gameplay MP4 recordings. Before/after benchmarking measures the impact of changes like driver updates or settings tweaks.\n\nSupported game configs auto-detect from default install locations: The Finals, Overwatch 2, Valorant, and CS2. Hardware tier is inferred automatically and recommendations adapt to your system.`,
     gallery: [
-      'https://placehold.co/1200x750/0d0b08/f0ece5?text=Diagnostics+Screenshot+1',
-      'https://placehold.co/1200x750/0a0d0a/5aff5a?text=Diagnostics+Screenshot+2',
+      `${import.meta.env.BASE_URL}Photos/DiagSC1.png`,
+      `${import.meta.env.BASE_URL}Photos/DiagSC2.png`,
       'https://placehold.co/1200x750/0d0b08/ff5a5a?text=Diagnostics+Screenshot+3',
     ],
   },
   {
     id: '03', title: 'Pokédex', category: 'Digital Library', type: 'Web Design', year: '2026',
     note: 'A simple Pokedex that includes the first 151 Pokemon, built with JS and a public API. Features search and filter functionality.',
-    thumb: 'https://placehold.co/320x200/2828ff/f0ece5?text=Pokedex',
+    thumb: `${import.meta.env.BASE_URL}Photos/pokedexSC1.png`,
     href: 'https://zvou.github.io/Pokedex/',
   },
   {
@@ -271,10 +267,10 @@ onUnmounted(() => cancelAnimationFrame(previewRaf))
                   :alt="`${galleryProject.title} screenshot ${activeIndex + 1}`"
                   class="gal-img"
                 />
-                <button class="gal-nav gal-nav--prev" @click="prevImage" aria-label="Previous">&#8592;</button>
-                <button class="gal-nav gal-nav--next" @click="nextImage" aria-label="Next">&#8594;</button>
+                <button v-if="galleryProject.gallery!.length > 1" class="gal-nav gal-nav--prev" @click="prevImage" aria-label="Previous">&#8592;</button>
+                <button v-if="galleryProject.gallery!.length > 1" class="gal-nav gal-nav--next" @click="nextImage" aria-label="Next">&#8594;</button>
               </div>
-              <div class="gal-thumbs">
+              <div v-if="galleryProject.gallery!.length > 1" class="gal-thumbs">
                 <button
                   v-for="(src, i) in galleryProject.gallery"
                   :key="i"
@@ -286,7 +282,7 @@ onUnmounted(() => cancelAnimationFrame(previewRaf))
                   <img v-else :src="src" :alt="`Thumbnail ${i + 1}`" />
                 </button>
               </div>
-              <span class="gal-counter">{{ activeIndex + 1 }} / {{ galleryProject.gallery!.length }}</span>
+              <span v-if="galleryProject.gallery!.length > 1" class="gal-counter">{{ activeIndex + 1 }} / {{ galleryProject.gallery!.length }}</span>
             </div>
 
             <div class="gal-info">
