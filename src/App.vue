@@ -1,6 +1,7 @@
 ﻿<script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import ScrollTrigger from 'gsap/ScrollTrigger'
+import { prefersReducedMotion } from './motion'
 import CustomCursor from './components/CustomCursor.vue'
 import ProgressBar from './components/ProgressBar.vue'
 import MarqueeTicker from './components/MarqueeTicker.vue'
@@ -14,7 +15,7 @@ import ContactSection from './components/ContactSection.vue'
 const showBackToTop = ref(false)
 
 function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: 'smooth' })
+  window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' })
 }
 
 onMounted(() => {

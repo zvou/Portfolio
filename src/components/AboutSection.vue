@@ -74,12 +74,12 @@ onMounted(() => {
 
             <div class="a-stats">
               <div class="stat">
-                <span class="stat-n">4<span class="acc">+</span></span>
+                <span class="stat-n">5<span class="acc">+</span></span>
                 <span class="stat-l">Projects</span>
               </div>
               <div class="stat">
-                <span class="stat-n">18<span class="acc">+</span></span>
-                <span class="stat-l">Years</span>
+                <span class="stat-n">2008</span>
+                <span class="stat-l">Coding since</span>
               </div>
               <div class="stat">
                 <span class="stat-n">∞</span>

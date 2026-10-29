@@ -6,6 +6,8 @@ import ScrollTrigger from 'gsap/ScrollTrigger'
 const el = ref<HTMLElement | null>(null)
 const emailCopied = ref(false)
 const EMAIL = 'amaliewallenius@outlook.com'
+// Put your CV at public/CV.pdf, then set this to `${import.meta.env.BASE_URL}CV.pdf`
+const CV_URL: string | null = null
 
 async function copyEmail(e: MouseEvent) {
   e.preventDefault()
@@ -52,6 +54,10 @@ onMounted(() => {
           <p class="c-desc">
             Open to work. Reach out if you have any questions.
           </p>
+          <p class="c-now">
+            <span class="c-now-label">Currently</span>
+            Studying web development and design at Digitale Talenter
+          </p>
           <div class="c-links">
             <a href="mailto:amaliewallenius@outlook.com" class="c-link c-link--email" @click="copyEmail">
               <span class="c-link-label">Email</span>
@@ -64,6 +70,10 @@ onMounted(() => {
             <a href="https://github.com/zvou" target="_blank" class="c-link">
               <span class="c-link-label">GitHub</span>
               <span class="c-link-val">zvou</span>
+            </a>
+            <a v-if="CV_URL" :href="CV_URL" target="_blank" rel="noopener" class="c-link">
+              <span class="c-link-label">CV</span>
+              <span class="c-link-val">Download PDF ↓</span>
             </a>
           </div>
         </div>
@@ -168,7 +178,22 @@ onMounted(() => {
   font-size: 0.97rem;
   line-height: 1.75;
   max-width: 360px;
+  margin-bottom: 1.2rem;
+}
+.c-now {
+  color: var(--fg-dim);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  max-width: 360px;
   margin-bottom: 2.5rem;
+}
+.c-now-label {
+  display: block;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.2rem;
 }
 
 .c-links { display: flex; flex-direction: column; gap: 0; border-top: 1px solid rgba(242,237,228,0.1); }

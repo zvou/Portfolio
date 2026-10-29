@@ -2,6 +2,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import gsap from 'gsap'
 import HeroCanvas from './HeroCanvas.vue'
+import { prefersReducedMotion } from '../motion'
 
 const heroRef   = ref<HTMLElement | null>(null)
 const typedRole = ref('')
@@ -34,8 +35,9 @@ function typeStep() {
 }
 
 onMounted(() => {
-  // Start typing after entrance animation settles
-  typingTimer = window.setTimeout(typeStep, 1800)
+  // Start typing after entrance animation settles (static role for reduced motion)
+  if (prefersReducedMotion) typedRole.value = roles[0]
+  else typingTimer = window.setTimeout(typeStep, 1800)
 
   const el = heroRef.value
   if (!el) return
@@ -139,9 +141,6 @@ onUnmounted(() => clearTimeout(typingTimer))
     </div>
 
     <!-- ── Ambient decorative overlays ── -->
-
-    <!-- Right-side system log -->
-
 
     <!-- Large ghost numbers -->
     <span class="h-num h-num--1" aria-hidden="true">138</span>
@@ -278,6 +277,9 @@ onUnmounted(() => clearTimeout(typingTimer))
   gap: 0.4rem;
   text-align: right;
   z-index: 3;
+  /* Solid backing so the text stays readable over the 3D canvas */
+  background: var(--bg);
+  padding: 0.6rem 0.8rem 0.3rem;
 }
 .h-meta-row {
   display: flex;
@@ -485,9 +487,10 @@ onUnmounted(() => clearTimeout(typingTimer))
   font-weight: 500;
   letter-spacing: 0.08em;
   padding: 0.85rem 2rem;
-  background: transparent;
+  /* Solid fill so the button stays readable over the 3D canvas */
+  background: var(--bg);
   color: var(--fg);
-  border: 1px solid rgba(13, 11, 8, 0.2);
+  border: 1px solid color-mix(in srgb, var(--fg) 25%, transparent);
   transition: border-color 0.2s, color 0.2s;
 }
 .btn-line:hover { border-color: var(--fg); }
@@ -542,29 +545,6 @@ onUnmounted(() => clearTimeout(typingTimer))
 }
 
 /* ── Ambient decorative overlays ── */
-.h-syslog {
-  position: absolute;
-  right: 1.2rem;
-  top: 50%;
-  transform: translateY(-50%) rotate(90deg);
-  transform-origin: center center;
-  display: flex;
-  flex-direction: row;
-  gap: 1.4rem;
-  z-index: 2;
-  pointer-events: none;
-  white-space: nowrap;
-}
-.h-syslog span {
-  font-family: var(--font-body);
-  font-size: 0.42rem;
-  letter-spacing: 0.14em;
-  color: var(--fg);
-  opacity: 0.28;
-  text-transform: uppercase;
-  display: block;
-}
-
 .h-num {
   position: absolute;
   font-family: var(--font-display);
@@ -630,15 +610,26 @@ onUnmounted(() => clearTimeout(typingTimer))
 .h-reg--tr { top: 1.4rem; right: calc(5vw + 2.6rem); }
 .h-reg--bl { bottom: 1.4rem; left: 4.5vw; }
 
+/* Mid widths: the canvas fills the right side, so drop the overlays that collide with it */
+@media (max-width: 1100px) {
+  .h-topmeta, .h-num, .h-plusmarks, .h-float { display: none; }
+}
+
+/* Short screens: the corp cluster runs into the barcode */
+@media (max-height: 760px) {
+  .h-corp { display: none; }
+}
 
 @media (max-width: 768px) {
   .hero { padding: 7rem 1.5rem 4rem 1.5rem; }
+  /* Fade the 3D shape behind the text so the tagline stays readable */
+  .hero :deep(.hero-canvas) { opacity: 0.35; }
   .h-ci { display: none; }
   .h-topmeta { display: none; }
   .h-checker { display: none; }
   .h-float { display: none; }
   .h-scroll { display: none; }
-  .h-warn, .h-scatter, .h-schema, .h-num, .h-plusmarks, .h-reticle, .h-syslog, .h-corp, .h-reg { display: none; }
+  .h-num, .h-plusmarks, .h-corp, .h-reg { display: none; }
   .h-bottom { flex-direction: column; gap: 1.5rem; }
 }
 </style>

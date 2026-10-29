@@ -6,7 +6,7 @@ const el = ref<HTMLElement | null>(null)
 
 interface Project {
   id: string; title: string; category: string; type: string; year: string
-  note: string; thumb: string
+  note: string; thumb?: string
   href?: string
   gallery?: string[]
   description?: string
@@ -20,8 +20,6 @@ const projects: Project[] = [
     description: `The Arsenal is a desktop-style fashion archive for Warframe. Built with React + TypeScript, it mimics a retro operating system interface where players can browse, catalog, and organize character fashion looks.\n\nFeatures include a draggable windowed interface with folders for browsing Operator, Drifter, and Warframe fashion loadouts, a searchable look browser, wallpaper selector, and a media player. The project emphasizes retro aesthetic through pixel-perfect UI, custom interactions, and OS-like window management, creating a unique way to explore character fashion outside the game.`,
     gallery: [
       `${import.meta.env.BASE_URL}Photos/ArsenalSC1.png`,
-      'https://placehold.co/1200x750/1a1410/f0ece5?text=Arsenal+Screenshot+2',
-      'https://placehold.co/1200x750/0d0b08/2828ff?text=Arsenal+Screenshot+3',
     ],
   },
   {
@@ -41,7 +39,6 @@ const projects: Project[] = [
     gallery: [
       `${import.meta.env.BASE_URL}Photos/DiagSC1.png`,
       `${import.meta.env.BASE_URL}Photos/DiagSC2.png`,
-      'https://placehold.co/1200x750/0d0b08/ff5a5a?text=Diagnostics+Screenshot+3',
     ],
   },
   {
@@ -53,22 +50,17 @@ const projects: Project[] = [
   {
     id: '05', title: 'Magnifier', category: 'Desktop Application', type: 'App', year: '2026',
     note: 'A Windows desktop magnification tool with hotkey-driven region selection, live tracking, and customizable magnified display windows.',
-    thumb: 'https://placehold.co/320x200/1a1a2e/00ffff?text=Magnifier',
     description: `A Windows app for magnifying specific screen areas in real-time. Built with C# and WPF, it provides hotkey-driven region selection and displays magnified content in separate windows.\n\nSelect regions either by drawing directly on screen or picking from existing windows. Drag and resize magnified windows freely, set up multiple regions simultaneously, and enable auto-tracking for moving targets to keep them centered. Perfect for accessibility needs, precision work like video editing or design, or monitoring multiple screen areas at once.\n\nThe app supports customizable magnification levels, window positioning, and optional border highlighting. Access settings to adjust behavior, configure hotkeys, and manage multiple magnified windows.`,
-    gallery: [
-      'https://placehold.co/1200x750/1a1a2e/00ffff?text=Magnifier+Main+Window',
-      'https://placehold.co/1200x750/1a1a2e/0088ff?text=Magnifier+Region+Selection',
-      'https://placehold.co/1200x750/1a1a2e/00ccff?text=Magnifier+Multi+Region',
-      'https://placehold.co/1200x750/1a1a2e/0055ff?text=Magnifier+Settings',
-    ],
+    gallery: [],
   },
 ]
 
+// Groups without projects are hidden until there is something to show
 const groupedProjects = computed(() => [
   { label: 'Web Design', key: 'web', items: projects.filter(p => p.type === 'Web Design') },
   { label: 'Graphic Design', key: 'graphic', items: projects.filter(p => p.type === 'Graphic Design') },
   { label: 'Other', key: 'other', items: projects.filter(p => p.type !== 'Web Design' && p.type !== 'Graphic Design') },
-])
+].filter(g => g.items.length > 0))
 
 // Floating preview card
 const previewVisible = ref(false)
@@ -78,7 +70,11 @@ const previewY       = ref(0)
 let previewRaf = 0
 let targetX = 0, targetY = 0
 
-function onRowEnter(thumb: string) { previewSrc.value = thumb; previewVisible.value = true }
+function onRowEnter(thumb?: string) {
+  if (!thumb) return
+  previewSrc.value = thumb
+  previewVisible.value = true
+}
 function onRowLeave() { previewVisible.value = false }
 function onRowMove(e: MouseEvent) { targetX = e.clientX + 24; targetY = e.clientY - 60 }
 
@@ -168,7 +164,7 @@ onUnmounted(() => cancelAnimationFrame(previewRaf))
       <div class="p-header">
         <h2 class="p-title">Selected<br /><em>Projects_</em></h2>
         <div class="p-header-right">
-          <p class="p-sub">A curated set of projects across branding, interfaces, and experimental web.</p>
+          <p class="p-sub">A curated set of projects across web interfaces, desktop tools, and experimental web.</p>
           <div class="p-checker" aria-hidden="true"></div>
         </div>
       </div>
@@ -180,14 +176,6 @@ onUnmounted(() => cancelAnimationFrame(previewRaf))
             <div class="p-cat-header-rule"></div>
             <span class="p-cat-header-count">[ {{ group.items.length }} ]</span>
           </div>
-          <a
-            v-if="group.items.length === 0"
-            class="p-row p-row--empty"
-            href="#"
-            @click.prevent
-          >
-            <span class="p-empty-msg">No projects yet</span>
-          </a>
           <a
             v-for="proj in group.items"
             :key="proj.id"
@@ -248,8 +236,8 @@ onUnmounted(() => cancelAnimationFrame(previewRaf))
             <button class="gal-close" @click="closeGallery" aria-label="Close">✕</button>
           </div>
 
-          <div class="gal-body">
-            <div class="gal-stage">
+          <div class="gal-body" :class="{ 'gal-body--text': galleryProject.gallery!.length === 0 }">
+            <div v-if="galleryProject.gallery!.length > 0" class="gal-stage">
               <div class="gal-img-wrap">
                 <video
                   v-if="isVideo(galleryProject.gallery![activeIndex])"
@@ -455,20 +443,6 @@ onUnmounted(() => cancelAnimationFrame(previewRaf))
   opacity: 0.55;
 }
 
-.p-row--empty {
-  pointer-events: none;
-  opacity: 0.35;
-  cursor: default;
-}
-.p-empty-msg {
-  grid-column: 1 / -1;
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
-  color: var(--fg-dim);
-  padding: 0.4rem 0;
-}
-
 /* ── Gallery modal ─────────────────────────────── */
 .gal-overlay {
   position: fixed;
@@ -608,6 +582,9 @@ onUnmounted(() => cancelAnimationFrame(previewRaf))
 .gal-counter { font-family: var(--font-body); font-size: 0.6rem; letter-spacing: 0.15em; color: var(--fg-dim); }
 
 .gal-info { padding: 2rem; display: flex; flex-direction: column; gap: 0.2rem; overflow-y: auto; overscroll-behavior: contain; max-height: 280px; border-top: 1px solid rgba(40, 40, 255, 0.15); }
+/* Projects without screenshots yet: let the description fill the modal */
+.gal-body--text .gal-info { max-height: none; border-top: none; }
+
 .gal-meta-row {
   display: flex;
   flex-direction: column;

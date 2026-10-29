@@ -4,18 +4,37 @@ import gsap from 'gsap'
 
 const el = ref<HTMLElement | null>(null)
 
-const cols = [
+// `usedIn` lists projects from the Projects section that use the skill
+interface Skill { name: string; usedIn?: string[] }
+
+const cols: { cat: string; skills: Skill[] }[] = [
   {
     cat: 'Design',
-    skills: ['Affinity', 'Photoshop', 'Figma', 'Illustrator', 'InDesign', 'CSP'],
+    skills: [
+      { name: 'Affinity' }, { name: 'Photoshop' }, { name: 'Figma' },
+      { name: 'Illustrator' }, { name: 'InDesign' }, { name: 'CSP' },
+    ],
   },
   {
     cat: 'Dev',
-    skills: ['HTML / CSS', 'JavaScript', 'Vue.js', 'React', 'Python', 'SQL', 'C#'],
+    skills: [
+      { name: 'HTML / CSS', usedIn: ['The Arsenal', 'Pokédex', 'This site'] },
+      { name: 'JavaScript', usedIn: ['Pokédex'] },
+      { name: 'TypeScript', usedIn: ['The Arsenal', 'This site'] },
+      { name: 'Vue.js', usedIn: ['This site'] },
+      { name: 'React', usedIn: ['The Arsenal'] },
+      { name: 'Python' },
+      { name: 'SQL' },
+      { name: 'C#', usedIn: ['Magnifier'] },
+    ],
   },
   {
-    cat: 'Others',
-    skills: ['Vite', 'Microsoft Dynamics 365', 'VS Code', 'Git', 'Obsidian', 'Magento', 'DevOps'],
+    cat: 'Tools & Platforms',
+    skills: [
+      { name: 'Vite', usedIn: ['This site'] },
+      { name: 'Microsoft Dynamics 365' }, { name: 'VS Code' }, { name: 'Git' },
+      { name: 'Obsidian' }, { name: 'Magento' }, { name: 'DevOps' },
+    ],
   },
 ]
 
@@ -56,8 +75,9 @@ onMounted(() => {
         <div v-for="col in cols" :key="col.cat" class="sk-col">
           <h3 class="sk-cat">{{ col.cat }}</h3>
           <ul class="sk-list">
-            <li v-for="s in col.skills" :key="s" class="sk-item">
-              <span class="sk-dot">&#9632;</span>{{ s }}
+            <li v-for="s in col.skills" :key="s.name" class="sk-item">
+              <span class="sk-dot">&#9632;</span>{{ s.name }}
+              <a v-if="s.usedIn" href="#projects" class="sk-used">→ {{ s.usedIn.join(', ') }}</a>
             </li>
           </ul>
         </div>
@@ -144,6 +164,7 @@ onMounted(() => {
   color: var(--fg-dim);
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 0.6rem;
   transition: color 0.2s;
 }
@@ -153,6 +174,14 @@ onMounted(() => {
   color: var(--accent);
   flex-shrink: 0;
 }
+.sk-used {
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  opacity: 0.75;
+  transition: opacity 0.2s;
+}
+.sk-used:hover { opacity: 1; }
 
 @media (max-width: 768px) {
   .skills { padding: 5rem 1.5rem; }

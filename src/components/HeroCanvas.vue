@@ -1,6 +1,7 @@
 ﻿<script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import * as THREE from 'three'
+import { prefersReducedMotion } from '../motion'
 
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 
@@ -144,7 +145,8 @@ onMounted(() => {
   window.addEventListener('scroll', scrollFn, { passive: true })
 
   function animate(ms: number) {
-    animId = requestAnimationFrame(animate)
+    // Reduced motion: render a single still frame
+    if (!prefersReducedMotion) animId = requestAnimationFrame(animate)
     const t  = ms * 0.001
     const sp = scrollProgress
 
@@ -181,6 +183,7 @@ onMounted(() => {
     renderer!.setSize(w, h, false)
     camera.aspect = w / h
     camera.updateProjectionMatrix()
+    if (prefersReducedMotion) renderer!.render(scene, camera)
   }
   window.addEventListener('resize', resizeFn)
 })

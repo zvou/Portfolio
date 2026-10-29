@@ -1,6 +1,7 @@
 ﻿<script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import gsap from 'gsap'
+import { prefersReducedMotion } from '../motion'
 
 const dot  = ref<HTMLElement | null>(null)
 const ring = ref<HTMLElement | null>(null)
@@ -9,8 +10,9 @@ const isHover = ref(false)
 onMounted(() => {
   if (!dot.value || !ring.value) return
 
-  const xToRing = gsap.quickTo(ring.value, 'x', { duration: 0.5, ease: 'power3.out' })
-  const yToRing = gsap.quickTo(ring.value, 'y', { duration: 0.5, ease: 'power3.out' })
+  const lag = prefersReducedMotion ? 0 : 0.5
+  const xToRing = gsap.quickTo(ring.value, 'x', { duration: lag, ease: 'power3.out' })
+  const yToRing = gsap.quickTo(ring.value, 'y', { duration: lag, ease: 'power3.out' })
 
   function onMove(e: MouseEvent) {
     const { clientX: x, clientY: y } = e

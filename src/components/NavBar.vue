@@ -1,5 +1,6 @@
 ﻿<script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
+import { prefersReducedMotion } from '../motion'
 
 const scrolled = ref(false)
 const menuOpen = ref(false)
@@ -41,7 +42,7 @@ function smoothScroll(e: MouseEvent, href: string) {
   if (lenis) {
     lenis.scrollTo(target, { duration: 1.6, easing: (t: number) => 1 - Math.pow(1 - t, 4) })
   } else {
-    target.scrollIntoView({ behavior: 'smooth' })
+    target.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' })
   }
 }
 
