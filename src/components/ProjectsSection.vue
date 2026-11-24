@@ -72,9 +72,15 @@ const projects: Project[] = [
   },
   {
     id: '06', title: 'Magnifier', category: 'Desktop Application', type: 'App', year: '2026',
-    note: 'A Windows desktop magnification tool with hotkey-driven region selection, live tracking, and customizable magnified display windows.',
-    description: `A Windows app for magnifying specific screen areas in real-time. Built with C# and WPF, it provides hotkey-driven region selection and displays magnified content in separate windows.\n\nSelect regions either by drawing directly on screen or picking from existing windows. Drag and resize magnified windows freely, set up multiple regions simultaneously, and enable auto-tracking for moving targets to keep them centered. Perfect for accessibility needs, precision work like video editing or design, or monitoring multiple screen areas at once.\n\nThe app supports customizable magnification levels, window positioning, and optional border highlighting. Access settings to adjust behavior, configure hotkeys, and manage multiple magnified windows.`,
-    gallery: [],
+    note: 'A Windows app that magnifies any parts of your screen in live, movable windows, and can follow a HUD element as it moves.',
+    thumb: `${import.meta.env.BASE_URL}Photos/MagnifierSC1.png`,
+    description: `Magnifier is a Windows app for keeping small parts of the screen readable, like a game's minimap, a timer or a health bar. You drag over any part of the screen, and it shows up enlarged in its own live window that you can move anywhere and zoom with the scroll wheel.\n\nWhat it does:\n- Magnify several areas at once, each in its own window with its own zoom (0.5× to 8×).\n- Anchor an area to a window, so it moves along with a windowed game instead of staying fixed on screen.\n- Auto-track: pick the icon or element that moves, and the area follows it every frame using OpenCV template matching.\n- Pin the overlays to make them click-through with no controls, for playing.\n- Global shortcuts for adding areas, pinning and hiding, which work even while a game has focus and can be changed in settings.\n- Sharp or smooth scaling, so text and pixel art stay crisp.\n- Areas are saved and come back the next time you open it, and it handles multiple monitors with different scaling.\n\nBuilt with C# and WPF on .NET 8, with screen capture through the Windows API and tracking with OpenCvSharp. The magnified windows hide themselves from the app's own capture, so they never magnify themselves even when they overlap what they show.`,
+    gallery: [
+      `${import.meta.env.BASE_URL}Videos/magnifier-showcase.webm`,
+      `${import.meta.env.BASE_URL}Photos/MagnifierSC1.png`,
+      `${import.meta.env.BASE_URL}Photos/MagnifierSC2.png`,
+      `${import.meta.env.BASE_URL}Photos/MagnifierSC3.png`,
+    ],
   },
 ]
 
