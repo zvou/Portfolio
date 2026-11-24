@@ -20,9 +20,9 @@ const cols: { cat: string; skills: Skill[] }[] = [
     skills: [
       { name: 'HTML / CSS', usedIn: ['The Arsenal', 'Pokédex', 'This site'] },
       { name: 'JavaScript', usedIn: ['Pokédex'] },
-      { name: 'TypeScript', usedIn: ['The Arsenal', 'This site'] },
+      { name: 'TypeScript', usedIn: ['The Arsenal', 'Little by Little', 'This site'] },
       { name: 'Vue.js', usedIn: ['This site'] },
-      { name: 'React', usedIn: ['The Arsenal'] },
+      { name: 'React', usedIn: ['The Arsenal', 'Little by Little'] },
       { name: 'Python' },
       { name: 'SQL' },
       { name: 'C#', usedIn: ['Magnifier'] },
@@ -31,7 +31,7 @@ const cols: { cat: string; skills: Skill[] }[] = [
   {
     cat: 'Tools & Platforms',
     skills: [
-      { name: 'Vite', usedIn: ['This site'] },
+      { name: 'Vite', usedIn: ['Little by Little', 'This site'] },
       { name: 'Microsoft Dynamics 365' }, { name: 'VS Code' }, { name: 'Git' },
       { name: 'Obsidian' }, { name: 'Magento' }, { name: 'DevOps' },
     ],

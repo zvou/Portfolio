@@ -74,7 +74,7 @@ onMounted(() => {
 
             <div class="a-stats">
               <div class="stat">
-                <span class="stat-n">5<span class="acc">+</span></span>
+                <span class="stat-n">6<span class="acc">+</span></span>
                 <span class="stat-l">Projects</span>
               </div>
               <div class="stat">
@@ -110,10 +110,10 @@ onMounted(() => {
               <div class="photo-corner photo-corner--tl" aria-hidden="true"></div>
               <div class="photo-corner photo-corner--br" aria-hidden="true"></div>
               <!-- HUD overlays -->
-              <div class="photo-hud photo-hud--tl" aria-hidden="true">&#x25C8; SCAN&#x00B7;ACTIVE<br/>X:0042&#x2009;Y:0118<br/>&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x252C;</div>
-              <div class="photo-hud photo-hud--br" aria-hidden="true">F/1.8&#x00B7;ISO&#x202F;800<br/>FOCAL&#x202F;:&#x202F;28mm<br/>&#x2534;&#x2500;&#x2500;&#x2500;&#x2500;</div>
+              <div class="photo-hud photo-hud--tl" aria-hidden="true">&#x25C8; SPRITE&#x00B7;LOADED<br/>36&#x00D7;48&#x2009;PX<br/>&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x252C;</div>
+              <div class="photo-hud photo-hud--br" aria-hidden="true">SCALE&#x202F;&#x00D7;10<br/>LITTLE&#x202F;BY&#x202F;LITTLE<br/>&#x2534;&#x2500;&#x2500;&#x2500;&#x2500;</div>
               <div class="photo-hud photo-hud--ml" aria-hidden="true">SIG&#x2009;&#x2588;&#x2588;&#x2588;&#x2588;&#x2591;&#x2009;67%</div>
-              <img :src="`${baseUrl}Photos/PhotoAbout.jpg`" alt="Amalie Wallenius" class="photo-img" />
+              <img :src="`${baseUrl}Photos/avatar.png`" alt="Pixel-art avatar of Amalie Wallenius, in the style of Little by Little" class="photo-img" />
               <!-- ID label strip -->
               <div class="photo-id-strip" aria-hidden="true">
                 <span>SUBJECT : AMW</span>
@@ -378,19 +378,10 @@ onMounted(() => {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;
+  object-position: center bottom;
   display: block;
-  filter: grayscale(1);
-}
-.photo-inner::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(40, 40, 255, 0.5);
-  opacity: 0.75;
-  mix-blend-mode: normal;
-  pointer-events: none;
-  z-index: 1;
+  /* Pixel-art avatar: keep the pixels hard-edged when scaled up */
+  image-rendering: pixelated;
 }
 /* Scan lines removed */
 /* ID label strip */

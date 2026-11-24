@@ -32,7 +32,18 @@ const projects: Project[] = [
     ],
   },
   {
-    id: '04', title: 'Diagnostics Tool [WIP]', category: 'Desktop Application', type: 'App', year: '2026',
+    id: '04', title: 'Little by Little [WIP]', category: 'Planner Game', type: 'App', year: '2026',
+    note: 'A cosy pixel-art game that doubles as a planner for people who leave things to the last minute. Tasks are quests, and your homestead grows as you get things done.',
+    thumb: `${import.meta.env.BASE_URL}Photos/PlannerSC1.jpg`,
+    description: `Little by Little is a cosy pixel-art game that also works as a motivation planner, built for people who put things off until the deadline (common with ADHD) and who enjoy cosy games. Your homestead and character run on your real day: tasks are quests, finishing them waters the garden and earns XP and coins, and the world never punishes you for a bad day.\n\nThe core is about starting earlier, not just finishing:\n- Start-by dates work backwards from the deadline, effort and a buffer, so the app nudges you to begin in time.\n- A "Just 10 minutes" focus timer on every quest, because starting is the hard part.\n- Big quests get split into small steps, each with its own earlier date.\n- Gentle streaks that rest and sick days never break, and nothing turns red for "late".\n\nIt covers work, hobbies, chores (with repeating schedules), a weekly meal planner with recipe import and a shopping list, and a calendar where quests and events can be dragged to another day. A household can share chores, meals and the calendar through Supabase sync.\n\nBuilt with React, TypeScript and Vite, with the game world in Phaser and hand-made pixel art checked against a fixed palette. It works offline as an installable PWA, stores everything locally in IndexedDB with automatic backups, and also runs as a Windows desktop app with Electron, including a global quick-add shortcut and a system tray. Every sound is generated in code with the Web Audio API.`,
+    gallery: [
+      `${import.meta.env.BASE_URL}Photos/PlannerSC1.jpg`,
+      `${import.meta.env.BASE_URL}Photos/PlannerSC2.jpg`,
+      `${import.meta.env.BASE_URL}Photos/PlannerSC3.jpg`,
+    ],
+  },
+  {
+    id: '05', title: 'Diagnostics Tool [WIP]', category: 'Desktop Application', type: 'App', year: '2026',
     note: 'Created an interactive diagnostics tool with smooth page transitions and data visualization.',
     thumb: `${import.meta.env.BASE_URL}Photos/DiagSC1.png`,
     description: `GameDiag is a Windows-first game performance diagnostics tool. It finds the most likely cause of FPS drops, stutter, and lag and tells you exactly what to fix.\n\nEvery scan produces ranked findings with severity, confidence, and actionable fixes. It checks CPU core count, GPU drivers and VRAM, RAM availability, storage space, power plans, background apps, frame-time data, game settings, network latency, and OS health.\n\nYou can run it via desktop UI, web dashboard, CLI, or system tray background monitor. It supports live frame-time capture with PresentMon, analyzes existing CSV data from capture tools, or processes gameplay MP4 recordings. Before/after benchmarking measures the impact of changes like driver updates or settings tweaks.\n\nSupported game configs auto-detect from default install locations: The Finals, Overwatch 2, Valorant, and CS2. Hardware tier is inferred automatically and recommendations adapt to your system.`,
@@ -48,7 +59,7 @@ const projects: Project[] = [
     href: 'https://zvou.github.io/Pokedex/',
   },
   {
-    id: '05', title: 'Magnifier', category: 'Desktop Application', type: 'App', year: '2026',
+    id: '06', title: 'Magnifier', category: 'Desktop Application', type: 'App', year: '2026',
     note: 'A Windows desktop magnification tool with hotkey-driven region selection, live tracking, and customizable magnified display windows.',
     description: `A Windows app for magnifying specific screen areas in real-time. Built with C# and WPF, it provides hotkey-driven region selection and displays magnified content in separate windows.\n\nSelect regions either by drawing directly on screen or picking from existing windows. Drag and resize magnified windows freely, set up multiple regions simultaneously, and enable auto-tracking for moving targets to keep them centered. Perfect for accessibility needs, precision work like video editing or design, or monitoring multiple screen areas at once.\n\nThe app supports customizable magnification levels, window positioning, and optional border highlighting. Access settings to adjust behavior, configure hotkeys, and manage multiple magnified windows.`,
     gallery: [],
