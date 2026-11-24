@@ -12,7 +12,7 @@ const cols: { cat: string; skills: Skill[] }[] = [
     cat: 'Design',
     skills: [
       { name: 'Affinity' }, { name: 'Photoshop' }, { name: 'Figma' },
-      { name: 'Illustrator' }, { name: 'InDesign' }, { name: 'CSP' },
+      { name: 'Illustrator' }, { name: 'InDesign' }, { name: 'Clip Studio Paint' },
     ],
   },
   {

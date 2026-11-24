@@ -12,7 +12,8 @@ function onLoad() {
 // Fake incremental progress while page loads
 let raf = 0
 function tick() {
-  if (!done && width.value < 85) {
+  if (done) return // page has loaded; stop the loop
+  if (width.value < 85) {
     width.value += (85 - width.value) * 0.04
   }
   raf = requestAnimationFrame(tick)

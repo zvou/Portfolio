@@ -7,7 +7,7 @@ import { prefersReducedMotion } from '../motion'
 const heroRef   = ref<HTMLElement | null>(null)
 const typedRole = ref('')
 
-const roles = ['Web Designer', 'Frontend Dev', 'Graphic Designer']
+const roles = ['Frontend Developer', 'UI Designer', 'Creative Developer']
 let roleIndex = 0
 let charIndex = 0
 let deleting  = false
@@ -102,7 +102,7 @@ onUnmounted(() => clearTimeout(typingTimer))
     <div class="h-topmeta">
       <div class="h-meta-row">
         <span class="meta-k">[ ROLE ]</span>
-        <span class="meta-v">Web Designer & Frontend Dev</span>
+        <span class="meta-v">Frontend Developer & UI Designer</span>
       </div>
       <div class="h-meta-row">
         <span class="meta-k">[ STATUS ]</span>
@@ -112,7 +112,9 @@ onUnmounted(() => clearTimeout(typingTimer))
 
     <!-- Main title block -->
     <div class="h-title-block">
-      <div class="clip"><h1 class="h-name">ZVOU</h1></div>
+      <div class="clip">
+        <h1 class="h-name"><span class="h-name-line">Amalie</span> <span class="h-name-line">Wallenius</span></h1>
+      </div>
       <div class="clip"><p class="h-serif"><span class="h-typed">{{ typedRole }}</span><span class="h-caret" aria-hidden="true">|</span></p></div>
     </div>
 
@@ -126,7 +128,7 @@ onUnmounted(() => clearTimeout(typingTimer))
     <div class="h-bottom">
       <div class="h-bottom-left">
         <p class="h-desc">
-          I make things on the web.<br />I try to make them worth the visit.
+          I design and build interfaces, tools and small games.<br />I care how they feel to use.
         </p>
         <!-- Barcode decoration -->
         <div class="h-barcode" aria-hidden="true">
@@ -156,7 +158,7 @@ onUnmounted(() => clearTimeout(typingTimer))
     <div class="h-corp" aria-hidden="true">
       <span>© ZVOU CORP. 2026</span>
       <span>CE ∂ AMP · WD SYSTEMS</span>
-      <span>REF-2026-001 ◈ CERTIFIED</span>
+      <span>REF-2026-001 ◈ OSLO</span>
     </div>
 
     <!-- Registration marks -->
@@ -313,13 +315,15 @@ onUnmounted(() => clearTimeout(typingTimer))
 
 .h-name {
   font-family: var(--font-display);
-  font-size: clamp(7rem, 18vw, 18rem);
+  /* Two lines (first name over surname), sized to stay clear of the sculpture */
+  font-size: clamp(4.5rem, 10.5vw, 11rem);
   font-weight: 900;
-  line-height: 0.9;
+  line-height: 0.86;
   letter-spacing: -0.01em;
   color: var(--fg);
   text-transform: uppercase;
 }
+.h-name-line { display: block; }
 .h-serif {
   font-family: var(--font-serif);
   font-style: italic;
@@ -388,7 +392,7 @@ onUnmounted(() => clearTimeout(typingTimer))
 .h-desc {
   font-size: clamp(1rem, 1.8vw, 1.2rem);
   color: var(--fg-dim);
-  max-width: 380px;
+  max-width: 520px;
   line-height: 1.7;
 }
 
@@ -623,7 +627,7 @@ onUnmounted(() => clearTimeout(typingTimer))
 @media (max-width: 768px) {
   .hero { padding: 7rem 1.5rem 4rem 1.5rem; }
   /* Fade the 3D shape behind the text so the tagline stays readable */
-  .hero :deep(.hero-canvas) { opacity: 0.35; }
+  .hero :deep(.hero-canvas.ready) { opacity: 0.35; }
   .h-ci { display: none; }
   .h-topmeta { display: none; }
   .h-checker { display: none; }

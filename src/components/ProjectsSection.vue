@@ -18,21 +18,21 @@ const projects: Project[] = [
   {
     id: '02', title: 'The Arsenal [WIP]', category: 'Digital Library', type: 'Web Design', year: '2026',
     note: 'A digital library of Warframe fashion, built as a Y2K-style desktop with draggable windows, a fake web browser and a media player.',
-    thumb: `${import.meta.env.BASE_URL}Photos/ArsenalSC1.png`,
+    thumb: `${import.meta.env.BASE_URL}Photos/thumbs/ArsenalSC1.jpg`,
     description: `The Arsenal is a digital library of fashion from Warframe, built to look and feel like an old desktop computer. Instead of scrolling a gallery, you log in, open folders and windows, and browse looks the way you'd browse files. The style is Y2K and "cybersigil": electric blue, halftone collages, chrome shapes and retro window chrome, inspired by Warframe's 1999 update.\n\nWhat you can do:\n- Log in on an ACCESS.EXE screen with a typewriter effect and a fade into the desktop.\n- Search 25 Warframe looks in HexFind, a fake web browser, and open any look as its own page.\n- Open a look's dossier window for every shot, the frame it's on, and notes on the colours.\n- Browse Operator and Drifter looks in folder windows with tabs and a filter.\n- Drag windows by their title bars, bring them to the front, and switch between them from the taskbar.\n- Use the start menu to search the whole archive or launch any view, including the VoidAmp media player.\n\nBuilt with React and TypeScript on Vite, with no UI library: the window manager, taskbar, layout that keeps windows on screen, and all styling are hand-written. It respects reduced-motion settings, and keyboard users can open looks with Enter.`,
     gallery: [
       `${import.meta.env.BASE_URL}Videos/arsenal-walkthrough.webm`,
-      `${import.meta.env.BASE_URL}Photos/ArsenalSC1.png`,
-      `${import.meta.env.BASE_URL}Photos/ArsenalSC2.png`,
-      `${import.meta.env.BASE_URL}Photos/ArsenalSC3.png`,
-      `${import.meta.env.BASE_URL}Photos/ArsenalSC4.png`,
-      `${import.meta.env.BASE_URL}Photos/ArsenalSC5.png`,
+      `${import.meta.env.BASE_URL}Photos/ArsenalSC1.jpg`,
+      `${import.meta.env.BASE_URL}Photos/ArsenalSC2.jpg`,
+      `${import.meta.env.BASE_URL}Photos/ArsenalSC3.jpg`,
+      `${import.meta.env.BASE_URL}Photos/ArsenalSC4.jpg`,
+      `${import.meta.env.BASE_URL}Photos/ArsenalSC5.jpg`,
     ],
   },
   {
     id: '03', title: 'Baro Relay Tracker', category: 'Loot Tracker', type: 'Web Design', year: '2026',
     note: 'Designed a real-time Warframe Tennocon relay tracker with live data and trackable loot tables.',
-    thumb: `${import.meta.env.BASE_URL}Photos/BaroSC1.png`,
+    thumb: `${import.meta.env.BASE_URL}Photos/thumbs/BaroSC1.jpg`,
     description: `A personal portfolio project built to track Baro Ki'Teer, the Void Trader in the videogame Warframe. Baro visits a random relay every two weeks carrying a rotating selection of exclusive items.\n\nThis tool helps players plan, track, and wishlist items across every visit, with special focus on the TennoCon 2026 event where Baro historically returns every item he has ever sold.\n\nFeatures:\n- Live Baro tab fetches the current Baro inventory in real time via the warframestat.us community API (with a DE worldstate fallback).\n- All Items catalog is a persistent, growing historical catalog of every item Baro has ever brought. Automatically updated each time Baro visits while the backend is running.\n- TennoCon 2026 tab displays the full catalog as a pre-event planning list. During the TennoCon event window (July 11-18 2026), switches to the live TennoCon inventory.\n- Wishlist: Star any item to mark it as wanted. Persists across sessions via localStorage.\n- Mark Acquired: Track which items you've already purchased. Bought items are visually dimmed with an overlay.\n- Search, filter & sort: Search by name, filter by status (wishlisted / not acquired), filter by category (Mods, Appearance, Weapons, Misc), and sort by name or price.\n- Stats panel shows at-a-glance counts for total items, wishlisted items, acquired items, and remaining.\n- Countdown timer provides live countdown to the next Baro arrival or departure, and a dedicated TennoCon countdown.`,
     gallery: [
       `${import.meta.env.BASE_URL}Videos/relay-tracker-preview.mp4`,
@@ -41,7 +41,7 @@ const projects: Project[] = [
   {
     id: '01', title: 'Little by Little [WIP]', category: 'Planner Game', type: 'App', year: '2026',
     note: 'A cosy pixel-art game that doubles as a planner for people who leave things to the last minute. Tasks are quests, and your homestead grows as you get things done.',
-    thumb: `${import.meta.env.BASE_URL}Photos/PlannerSC1.jpg`,
+    thumb: `${import.meta.env.BASE_URL}Photos/thumbs/PlannerSC1.jpg`,
     featured: {
       pitch: 'A cosy pixel-art game that helps you start things earlier. Your real tasks become quests, and your homestead grows as you get them done.',
       image: `${import.meta.env.BASE_URL}Photos/PlannerSC2.jpg`,
@@ -57,7 +57,7 @@ const projects: Project[] = [
   {
     id: '05', title: 'Diagnostics Tool [WIP]', category: 'Desktop Application', type: 'App', year: '2026',
     note: 'A Windows tool that scans your PC and frame-time data to find the most likely cause of FPS drops and stutter, then tells you what to fix.',
-    thumb: `${import.meta.env.BASE_URL}Photos/GameDiagSC1.png`,
+    thumb: `${import.meta.env.BASE_URL}Photos/thumbs/GameDiagSC1.jpg`,
     description: `GameDiag is a Windows-first game performance diagnostics tool. It finds the most likely cause of FPS drops, stutter, and lag and tells you exactly what to fix.\n\nEvery scan produces ranked findings with severity, confidence, and actionable fixes. It checks CPU core count, GPU drivers and VRAM, RAM availability, storage space, power plans, background apps, frame-time data, game settings, network latency, and OS health.\n\nYou can run it via desktop UI, web dashboard, CLI, or system tray background monitor. It supports live frame-time capture with PresentMon, analyzes existing CSV data from capture tools, or processes gameplay MP4 recordings. Before/after benchmarking measures the impact of changes like driver updates or settings tweaks.\n\nSupported game configs auto-detect from default install locations: The Finals, Overwatch 2, Valorant, and CS2. Hardware tier is inferred automatically and recommendations adapt to your system.\n\nThe desktop app shows a health score with the primary cause up front, stat tiles for average FPS, 1% lows, P99 frame time and stutter events, and tabs for findings, an interactive frame-time chart, system details, before/after comparison, history and tools. It has light and dark themes, and a full scan takes about 20 seconds. Built in Python with Tkinter, with no required third-party dependencies.`,
     gallery: [
       `${import.meta.env.BASE_URL}Videos/gamediag-showcase.webm`,
@@ -70,18 +70,18 @@ const projects: Project[] = [
   {
     id: '04', title: 'Pokédex', category: 'Digital Library', type: 'Web Design', year: '2026',
     note: 'A simple Pokedex that includes the first 151 Pokemon, built with JS and a public API. Features search and filter functionality.',
-    thumb: `${import.meta.env.BASE_URL}Photos/pokedexSC1.png`,
+    thumb: `${import.meta.env.BASE_URL}Photos/thumbs/pokedexSC1.jpg`,
     href: 'https://zvou.github.io/Pokedex/',
   },
   {
     id: '06', title: 'Magnifier', category: 'Desktop Application', type: 'App', year: '2026',
     note: 'A Windows app that magnifies any parts of your screen in live, movable windows, and can follow a HUD element as it moves.',
-    thumb: `${import.meta.env.BASE_URL}Photos/MagnifierSC1.png`,
+    thumb: `${import.meta.env.BASE_URL}Photos/thumbs/MagnifierSC1.jpg`,
     description: `Magnifier is a Windows app for keeping small parts of the screen readable, like a game's minimap, a timer or a health bar. You drag over any part of the screen, and it shows up enlarged in its own live window that you can move anywhere and zoom with the scroll wheel.\n\nWhat it does:\n- Magnify several areas at once, each in its own window with its own zoom (0.5× to 8×).\n- Anchor an area to a window, so it moves along with a windowed game instead of staying fixed on screen.\n- Auto-track: pick the icon or element that moves, and the area follows it every frame using OpenCV template matching.\n- Pin the overlays to make them click-through with no controls, for playing.\n- Global shortcuts for adding areas, pinning and hiding, which work even while a game has focus and can be changed in settings.\n- Sharp or smooth scaling, so text and pixel art stay crisp.\n- Areas are saved and come back the next time you open it, and it handles multiple monitors with different scaling.\n\nBuilt with C# and WPF on .NET 8, with screen capture through the Windows API and tracking with OpenCvSharp. The magnified windows hide themselves from the app's own capture, so they never magnify themselves even when they overlap what they show.`,
     gallery: [
       `${import.meta.env.BASE_URL}Videos/magnifier-showcase.webm`,
-      `${import.meta.env.BASE_URL}Photos/MagnifierSC1.png`,
-      `${import.meta.env.BASE_URL}Photos/MagnifierSC2.png`,
+      `${import.meta.env.BASE_URL}Photos/MagnifierSC1.jpg`,
+      `${import.meta.env.BASE_URL}Photos/MagnifierSC2.jpg`,
       `${import.meta.env.BASE_URL}Photos/MagnifierSC3.png`,
     ],
   },
@@ -174,7 +174,7 @@ onMounted(() => {
       <div class="p-header">
         <h2 class="p-title">Selected<br /><em>Projects_</em></h2>
         <div class="p-header-right">
-          <p class="p-sub">A curated set of projects across web interfaces, desktop tools, and experimental web.</p>
+          <p class="p-sub">A curated set of projects: web apps, desktop tools and a game in progress.</p>
           <div class="p-checker" aria-hidden="true"></div>
         </div>
       </div>
@@ -272,6 +272,7 @@ onMounted(() => {
                   :src="galleryProject.gallery![activeIndex]"
                   class="gal-img gal-video"
                   controls
+                  preload="metadata"
                   muted
                   loop
                   playsinline
@@ -494,6 +495,30 @@ onMounted(() => {
 }
 .p-row:hover .p-thumb { border-color: var(--accent); }
 .p-row:hover .p-thumb img { transform: scale(1.06); }
+
+/* Project images sit in the site's blue monochrome until you hover or focus them.
+   Only on devices that can hover, so phones always see the real colours. */
+@media (hover: hover) {
+  .p-thumb, .p-feature-media { position: relative; }
+  .p-thumb img, .p-feature-media img {
+    filter: grayscale(1) contrast(1.12) brightness(0.92);
+    transition: filter 0.45s ease, transform 0.45s ease;
+  }
+  .p-thumb::after, .p-feature-media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    mix-blend-mode: color;
+    opacity: 0.72;
+    pointer-events: none;
+    transition: opacity 0.45s ease;
+  }
+  .p-row:hover .p-thumb img, .p-row:focus-visible .p-thumb img,
+  .p-feature:hover .p-feature-media img, .p-feature:focus-visible .p-feature-media img { filter: none; }
+  .p-row:hover .p-thumb::after, .p-row:focus-visible .p-thumb::after,
+  .p-feature:hover .p-feature-media::after, .p-feature:focus-visible .p-feature-media::after { opacity: 0; }
+}
 .p-thumb-empty {
   display: flex;
   height: 100%;

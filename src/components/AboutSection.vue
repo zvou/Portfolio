@@ -71,6 +71,9 @@ onMounted(() => {
             <p>
               I studied graphic design in Oslo for a bit, then moved to England to study Computer Science. I like combining both sides, so I end up building things that look good and actually work well.
             </p>
+            <p>
+              Now I'm looking for a junior frontend role where I get to do both the design and the build.
+            </p>
 
             <div class="a-stats">
               <div class="stat">
@@ -82,8 +85,8 @@ onMounted(() => {
                 <span class="stat-l">Coding since</span>
               </div>
               <div class="stat">
-                <span class="stat-n">∞</span>
-                <span class="stat-l">Ideas</span>
+                <span class="stat-n">4<span class="acc">+</span></span>
+                <span class="stat-l">Languages</span>
               </div>
             </div>
           </div>
@@ -132,7 +135,7 @@ onMounted(() => {
           </div>
           <!-- Crossing line: left edge -->
           <div class="a-spark-cross a-spark-cross--l" aria-hidden="true">&#x2500;&#x2500;&#x2500;&#x2500; &#x22C4; &#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;</div>
-          <p class="a-caption">UI DESIGNER · WEB DEV · OSLO</p>
+          <p class="a-caption">FRONTEND DEV · UI DESIGNER · OSLO</p>
         </div>
 
       </div>

@@ -52,7 +52,7 @@ onMounted(() => {
           <div class="c-frame c-frame--tl" aria-hidden="true"></div>
           <h2 class="c-title">Contact<br /><em>Me_</em></h2>
           <p class="c-desc">
-            Open to work. Reach out if you have any questions.
+            Looking for a junior frontend or UI role in Oslo. Email is the fastest way to reach me.
           </p>
           <p class="c-now">
             <span class="c-now-label">Currently</span>
