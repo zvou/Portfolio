@@ -1,5 +1,5 @@
 ﻿<script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import gsap from 'gsap'
 
 const el = ref<HTMLElement | null>(null)
@@ -88,28 +88,6 @@ const groupedProjects = computed(() => [
   { label: 'Other', key: 'other', items: listed.filter(p => p.type !== 'Web Design' && p.type !== 'Graphic Design') },
 ].filter(g => g.items.length > 0))
 
-// Floating preview card
-const previewVisible = ref(false)
-const previewSrc     = ref('')
-const previewX       = ref(0)
-const previewY       = ref(0)
-let previewRaf = 0
-let targetX = 0, targetY = 0
-
-function onRowEnter(thumb?: string) {
-  if (!thumb) return
-  previewSrc.value = thumb
-  previewVisible.value = true
-}
-function onRowLeave() { previewVisible.value = false }
-function onRowMove(e: MouseEvent) { targetX = e.clientX + 24; targetY = e.clientY - 60 }
-
-function lerpPreview() {
-  previewX.value += (targetX - previewX.value) * 0.12
-  previewY.value += (targetY - previewY.value) * 0.12
-  previewRaf = requestAnimationFrame(lerpPreview)
-}
-
 // Gallery modal
 const galleryOpen    = ref(false)
 const galleryProject = ref<Project | null>(null)
@@ -120,7 +98,6 @@ function openGallery(proj: Project, e: MouseEvent) {
   galleryProject.value = proj
   activeIndex.value = 0
   galleryOpen.value = true
-  previewVisible.value = false
   document.body.style.overflow = 'hidden'
   document.documentElement.style.overflow = 'hidden'
 }
@@ -152,7 +129,6 @@ function isVideo(src: string): boolean {
 }
 
 onMounted(() => {
-  lerpPreview()
   if (!el.value) return
   gsap.from(el.value.querySelectorAll('.p-feature, .p-cat-header, .p-row'), {
     scrollTrigger: { trigger: el.value, start: 'top 75%' },
@@ -160,7 +136,6 @@ onMounted(() => {
   })
 })
 
-onUnmounted(() => cancelAnimationFrame(previewRaf))
 </script>
 
 <template>
@@ -238,12 +213,13 @@ onUnmounted(() => cancelAnimationFrame(previewRaf))
             :rel="proj.href ? 'noopener noreferrer' : undefined"
             class="p-row"
             :class="{ 'has-gallery': proj.gallery }"
-            @mouseenter="onRowEnter(proj.thumb)"
-            @mouseleave="onRowLeave"
-            @mousemove="onRowMove"
             @click="proj.gallery ? openGallery(proj, $event) : (!proj.href && $event.preventDefault())"
           >
             <span class="p-num">{{ proj.id }}</span>
+            <span class="p-thumb">
+              <img v-if="proj.thumb" :src="proj.thumb" alt="" loading="lazy" />
+              <span v-else class="p-thumb-empty">Preview soon</span>
+            </span>
             <span class="p-name">{{ proj.title }}</span>
             <span class="p-cat">{{ proj.category }}</span>
             <span class="p-type">{{ proj.type }}</span>
@@ -256,18 +232,6 @@ onUnmounted(() => cancelAnimationFrame(previewRaf))
       </div>
 
     </div>
-
-    <!-- Floating thumbnail preview -->
-    <Teleport to="body">
-      <div
-        class="p-preview"
-        :class="{ visible: previewVisible }"
-        :style="{ left: previewX + 'px', top: previewY + 'px' }"
-        aria-hidden="true"
-      >
-        <img :src="previewSrc" alt="" />
-      </div>
-    </Teleport>
 
     <!-- Gallery modal -->
     <Teleport to="body">
@@ -396,7 +360,7 @@ onUnmounted(() => cancelAnimationFrame(previewRaf))
 
 .p-row {
   display: grid;
-  grid-template-columns: 3.5rem 1fr auto auto auto 2rem;
+  grid-template-columns: 3.5rem 9rem 1fr auto auto auto 2rem;
   grid-template-rows: auto auto;
   align-items: center;
   gap: 1rem;
@@ -492,7 +456,7 @@ onUnmounted(() => cancelAnimationFrame(previewRaf))
 
 /* Process note — hidden until hover */
 .p-note {
-  grid-column: 2 / -1;
+  grid-column: 3 / -1;
   font-family: var(--font-body);
   font-style: normal;
   font-size: 0.85rem;
@@ -503,24 +467,35 @@ onUnmounted(() => cancelAnimationFrame(previewRaf))
   transition: max-height 0.35s ease, opacity 0.3s ease, margin-top 0.3s ease;
 }
 
-/* Floating thumbnail preview */
-.p-preview {
-  position: fixed;
-  pointer-events: none;
-  z-index: 9999;
-  opacity: 0;
-  transform: scale(0.92) translateY(6px);
-  transition: opacity 0.22s ease, transform 0.22s ease;
-  border: 1px solid color-mix(in srgb, var(--fg) 10%, transparent);
+/* Inline thumbnail beside each project name */
+.p-thumb {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--fg) 12%, transparent);
+  background: var(--bg2);
+  line-height: 0;
+  transition: border-color 0.2s;
 }
-.p-preview.visible {
-  opacity: 1;
-  transform: scale(1) translateY(0);
+.p-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform 0.4s ease;
 }
-.p-preview img {
-  display: block;
-  width: 280px;
-  height: auto;
+.p-row:hover .p-thumb { border-color: var(--accent); }
+.p-row:hover .p-thumb img { transform: scale(1.06); }
+.p-thumb-empty {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-size: 0.55rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  color: var(--fg-dim);
 }
 
 .p-num { font-family: var(--font-body); font-size: 0.62rem; letter-spacing: 0.15em; color: var(--fg-dim); }
@@ -775,7 +750,7 @@ onUnmounted(() => cancelAnimationFrame(previewRaf))
 
 @media (max-width: 768px) {
   .projects { padding: 5rem 1.5rem; }
-  .p-row { grid-template-columns: 2.5rem 1fr 1.5rem; }
+  .p-row { grid-template-columns: 2rem 5.5rem 1fr 1.5rem; gap: 0.8rem; }
   .p-cat, .p-type, .p-year { display: none; }
   .p-name { font-size: clamp(1.4rem, 7vw, 2rem); }
   .p-header { flex-direction: column; align-items: flex-start; }
