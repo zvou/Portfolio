@@ -56,12 +56,15 @@ const projects: Project[] = [
   },
   {
     id: '05', title: 'Diagnostics Tool [WIP]', category: 'Desktop Application', type: 'App', year: '2026',
-    note: 'Created an interactive diagnostics tool with smooth page transitions and data visualization.',
-    thumb: `${import.meta.env.BASE_URL}Photos/DiagSC1.png`,
-    description: `GameDiag is a Windows-first game performance diagnostics tool. It finds the most likely cause of FPS drops, stutter, and lag and tells you exactly what to fix.\n\nEvery scan produces ranked findings with severity, confidence, and actionable fixes. It checks CPU core count, GPU drivers and VRAM, RAM availability, storage space, power plans, background apps, frame-time data, game settings, network latency, and OS health.\n\nYou can run it via desktop UI, web dashboard, CLI, or system tray background monitor. It supports live frame-time capture with PresentMon, analyzes existing CSV data from capture tools, or processes gameplay MP4 recordings. Before/after benchmarking measures the impact of changes like driver updates or settings tweaks.\n\nSupported game configs auto-detect from default install locations: The Finals, Overwatch 2, Valorant, and CS2. Hardware tier is inferred automatically and recommendations adapt to your system.`,
+    note: 'A Windows tool that scans your PC and frame-time data to find the most likely cause of FPS drops and stutter, then tells you what to fix.',
+    thumb: `${import.meta.env.BASE_URL}Photos/GameDiagSC1.png`,
+    description: `GameDiag is a Windows-first game performance diagnostics tool. It finds the most likely cause of FPS drops, stutter, and lag and tells you exactly what to fix.\n\nEvery scan produces ranked findings with severity, confidence, and actionable fixes. It checks CPU core count, GPU drivers and VRAM, RAM availability, storage space, power plans, background apps, frame-time data, game settings, network latency, and OS health.\n\nYou can run it via desktop UI, web dashboard, CLI, or system tray background monitor. It supports live frame-time capture with PresentMon, analyzes existing CSV data from capture tools, or processes gameplay MP4 recordings. Before/after benchmarking measures the impact of changes like driver updates or settings tweaks.\n\nSupported game configs auto-detect from default install locations: The Finals, Overwatch 2, Valorant, and CS2. Hardware tier is inferred automatically and recommendations adapt to your system.\n\nThe desktop app shows a health score with the primary cause up front, stat tiles for average FPS, 1% lows, P99 frame time and stutter events, and tabs for findings, an interactive frame-time chart, system details, before/after comparison, history and tools. It has light and dark themes, and a full scan takes about 20 seconds. Built in Python with Tkinter, with no required third-party dependencies.`,
     gallery: [
-      `${import.meta.env.BASE_URL}Photos/DiagSC1.png`,
-      `${import.meta.env.BASE_URL}Photos/DiagSC2.png`,
+      `${import.meta.env.BASE_URL}Videos/gamediag-showcase.webm`,
+      `${import.meta.env.BASE_URL}Photos/GameDiagSC1.png`,
+      `${import.meta.env.BASE_URL}Photos/GameDiagSC2.png`,
+      `${import.meta.env.BASE_URL}Photos/GameDiagSC3.png`,
+      `${import.meta.env.BASE_URL}Photos/GameDiagSC4.png`,
     ],
   },
   {
