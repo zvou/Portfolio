@@ -17,11 +17,16 @@ interface Project {
 const projects: Project[] = [
   {
     id: '02', title: 'The Arsenal [WIP]', category: 'Digital Library', type: 'Web Design', year: '2026',
-    note: 'Built a digital library for Warframe fashion, inspired by Warframes 1999 update. Designed to look like a desktop.',
+    note: 'A digital library of Warframe fashion, built as a Y2K-style desktop with draggable windows, a fake web browser and a media player.',
     thumb: `${import.meta.env.BASE_URL}Photos/ArsenalSC1.png`,
-    description: `The Arsenal is a desktop-style fashion archive for Warframe. Built with React + TypeScript, it mimics a retro operating system interface where players can browse, catalog, and organize character fashion looks.\n\nFeatures include a draggable windowed interface with folders for browsing Operator, Drifter, and Warframe fashion loadouts, a searchable look browser, wallpaper selector, and a media player. The project emphasizes retro aesthetic through pixel-perfect UI, custom interactions, and OS-like window management, creating a unique way to explore character fashion outside the game.`,
+    description: `The Arsenal is a digital library of fashion from Warframe, built to look and feel like an old desktop computer. Instead of scrolling a gallery, you log in, open folders and windows, and browse looks the way you'd browse files. The style is Y2K and "cybersigil": electric blue, halftone collages, chrome shapes and retro window chrome, inspired by Warframe's 1999 update.\n\nWhat you can do:\n- Log in on an ACCESS.EXE screen with a typewriter effect and a fade into the desktop.\n- Search 25 Warframe looks in HexFind, a fake web browser, and open any look as its own page.\n- Open a look's dossier window for every shot, the frame it's on, and notes on the colours.\n- Browse Operator and Drifter looks in folder windows with tabs and a filter.\n- Drag windows by their title bars, bring them to the front, and switch between them from the taskbar.\n- Use the start menu to search the whole archive or launch any view, including the VoidAmp media player.\n\nBuilt with React and TypeScript on Vite, with no UI library: the window manager, taskbar, layout that keeps windows on screen, and all styling are hand-written. It respects reduced-motion settings, and keyboard users can open looks with Enter.`,
     gallery: [
+      `${import.meta.env.BASE_URL}Videos/arsenal-walkthrough.webm`,
       `${import.meta.env.BASE_URL}Photos/ArsenalSC1.png`,
+      `${import.meta.env.BASE_URL}Photos/ArsenalSC2.png`,
+      `${import.meta.env.BASE_URL}Photos/ArsenalSC3.png`,
+      `${import.meta.env.BASE_URL}Photos/ArsenalSC4.png`,
+      `${import.meta.env.BASE_URL}Photos/ArsenalSC5.png`,
     ],
   },
   {
