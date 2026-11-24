@@ -92,10 +92,8 @@ onMounted(() => {
         <div class="a-right">
           <!-- Sparkle cluster: top-right -->
           <div class="a-spark-tr" aria-hidden="true">
-            <span class="spark-ascii spark-ascii--top">SYS:OK &#x25A0; 4900FF&#x00B7;CE<br/>&#x2588;&#x2588;&#x2591;&#x2591;&#x2591; 38% &#x2592;&#x2593;<br/>&#x2500;&#x2500;&#x00B7;&#x2500;&#x2500;&#x2500; &#x00B7;&#x00B7; &#x2500;&#x2500;<br/>0xB4F2&#x00B7;A0&#x00B7;3C<br/>&#x28FF; NODE:02 // ERR:0<br/>&#x2593;&#x2591;&#x2592; PROC &#x00B7;&#x00B7; &#x22A0;</span>
             <svg class="spark spark--lg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"><path d="M50,2 C50,2 47,47 2,50 C47,50 50,98 50,98 C50,98 53,53 98,50 C53,50 50,2 50,2Z"/></svg>
             <svg class="spark spark--sm" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"><path d="M50,2 C50,2 47,47 2,50 C47,50 50,98 50,98 C50,98 53,53 98,50 C53,50 50,2 50,2Z"/></svg>
-            <span class="spark-ascii">&#x00B7;&#x00B7;&#x00B7; // &#x25C8; &#x22A0;&#x00B7;&#x22A0;<br/>ERR: NONE &#x2295;&#x2297;<br/>&#x2500;&#x2500;&#x252C;&#x2500;&#x2500; &#x2261;&#x2261; &#x0394;t:0ms</span>
           </div>
           <!-- Sparkle cluster: bottom-left -->
           <div class="a-spark-bl" aria-hidden="true">
@@ -124,16 +122,6 @@ onMounted(() => {
               </div>
             </div>
           </div>
-          <!-- Overhang: crosses RIGHT edge of photo -->
-          <div class="a-spark-ov a-spark-ov--r" aria-hidden="true">
-            <span>&#x2500;&#x2500;&#x2500;&#x2500; &#x25C8; VER:2.6 &#x2500;&#x2500;</span>
-            <span>PWR:91% &#x25C4; &#x25A0;</span>
-            <span>&#x2500;&#x2524; CE &#x251C;&#x2500;&#x2500;&#x2500;</span>
-            <span>&#x0394; 0xFF3A &#x00B7; &#x2592;</span>
-            <span>&#x2500;&#x2500;&#x2500;&#x2500; &#x2261; &#x2500;&#x2500;</span>
-          </div>
-          <!-- Crossing line: right edge -->
-          <div class="a-spark-cross a-spark-cross--r" aria-hidden="true">&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500; &#x22C4; &#x2500;&#x2500;&#x2500;&#x2500;&#x2500;</div>
           <!-- Overhang: crosses LEFT edge of photo -->
           <div class="a-spark-ov a-spark-ov--l" aria-hidden="true">
             <span>&#x2500;&#x2500; LAT:59.91 &#x2500;&#x2500;</span>
@@ -309,7 +297,6 @@ onMounted(() => {
   letter-spacing: 0.06em;
   text-align: right;
 }
-.spark-ascii--top { text-align: left; }
 
 /* ── Overhangs: ASCII bleeding outside photo edges ── */
 .a-spark-ov {
@@ -327,11 +314,6 @@ onMounted(() => {
   text-transform: uppercase;
   white-space: nowrap;
 }
-.a-spark-ov--r {
-  top: 28%;
-  right: -3rem;
-  align-items: flex-start;
-}
 .a-spark-ov--l {
   top: 52%;
   left: -3rem;
@@ -348,10 +330,6 @@ onMounted(() => {
   letter-spacing: 0.1em;
   opacity: 0.4;
   white-space: nowrap;
-}
-.a-spark-cross--r {
-  top: 44%;
-  right: -4rem;
 }
 .a-spark-cross--l {
   top: 68%;

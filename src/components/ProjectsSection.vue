@@ -10,11 +10,13 @@ interface Project {
   href?: string
   gallery?: string[]
   description?: string
+  /** Shown as the large card above the list instead of as a row */
+  featured?: { pitch: string; image: string; tags: string[] }
 }
 
 const projects: Project[] = [
   {
-    id: '01', title: 'The Arsenal [WIP]', category: 'Digital Library', type: 'Web Design', year: '2026',
+    id: '02', title: 'The Arsenal [WIP]', category: 'Digital Library', type: 'Web Design', year: '2026',
     note: 'Built a digital library for Warframe fashion, inspired by Warframes 1999 update. Designed to look like a desktop.',
     thumb: `${import.meta.env.BASE_URL}Photos/ArsenalSC1.png`,
     description: `The Arsenal is a desktop-style fashion archive for Warframe. Built with React + TypeScript, it mimics a retro operating system interface where players can browse, catalog, and organize character fashion looks.\n\nFeatures include a draggable windowed interface with folders for browsing Operator, Drifter, and Warframe fashion loadouts, a searchable look browser, wallpaper selector, and a media player. The project emphasizes retro aesthetic through pixel-perfect UI, custom interactions, and OS-like window management, creating a unique way to explore character fashion outside the game.`,
@@ -23,7 +25,7 @@ const projects: Project[] = [
     ],
   },
   {
-    id: '02', title: 'Baro Relay Tracker', category: 'Loot Tracker', type: 'Web Design', year: '2026',
+    id: '03', title: 'Baro Relay Tracker', category: 'Loot Tracker', type: 'Web Design', year: '2026',
     note: 'Designed a real-time Warframe Tennocon relay tracker with live data and trackable loot tables.',
     thumb: `${import.meta.env.BASE_URL}Photos/BaroSC1.png`,
     description: `A personal portfolio project built to track Baro Ki'Teer, the Void Trader in the videogame Warframe. Baro visits a random relay every two weeks carrying a rotating selection of exclusive items.\n\nThis tool helps players plan, track, and wishlist items across every visit, with special focus on the TennoCon 2026 event where Baro historically returns every item he has ever sold.\n\nFeatures:\n- Live Baro tab fetches the current Baro inventory in real time via the warframestat.us community API (with a DE worldstate fallback).\n- All Items catalog is a persistent, growing historical catalog of every item Baro has ever brought. Automatically updated each time Baro visits while the backend is running.\n- TennoCon 2026 tab displays the full catalog as a pre-event planning list. During the TennoCon event window (July 11-18 2026), switches to the live TennoCon inventory.\n- Wishlist: Star any item to mark it as wanted. Persists across sessions via localStorage.\n- Mark Acquired: Track which items you've already purchased. Bought items are visually dimmed with an overlay.\n- Search, filter & sort: Search by name, filter by status (wishlisted / not acquired), filter by category (Mods, Appearance, Weapons, Misc), and sort by name or price.\n- Stats panel shows at-a-glance counts for total items, wishlisted items, acquired items, and remaining.\n- Countdown timer provides live countdown to the next Baro arrival or departure, and a dedicated TennoCon countdown.`,
@@ -32,9 +34,14 @@ const projects: Project[] = [
     ],
   },
   {
-    id: '04', title: 'Little by Little [WIP]', category: 'Planner Game', type: 'App', year: '2026',
+    id: '01', title: 'Little by Little [WIP]', category: 'Planner Game', type: 'App', year: '2026',
     note: 'A cosy pixel-art game that doubles as a planner for people who leave things to the last minute. Tasks are quests, and your homestead grows as you get things done.',
     thumb: `${import.meta.env.BASE_URL}Photos/PlannerSC1.jpg`,
+    featured: {
+      pitch: 'A cosy pixel-art game that helps you start things earlier. Your real tasks become quests, and your homestead grows as you get them done.',
+      image: `${import.meta.env.BASE_URL}Photos/PlannerSC2.jpg`,
+      tags: ['React', 'TypeScript', 'Phaser', 'Pixel art', 'PWA + Electron'],
+    },
     description: `Little by Little is a cosy pixel-art game that also works as a motivation planner, built for people who put things off until the deadline (common with ADHD) and who enjoy cosy games. Your homestead and character run on your real day: tasks are quests, finishing them waters the garden and earns XP and coins, and the world never punishes you for a bad day.\n\nThe core is about starting earlier, not just finishing:\n- Start-by dates work backwards from the deadline, effort and a buffer, so the app nudges you to begin in time.\n- A "Just 10 minutes" focus timer on every quest, because starting is the hard part.\n- Big quests get split into small steps, each with its own earlier date.\n- Gentle streaks that rest and sick days never break, and nothing turns red for "late".\n\nIt covers work, hobbies, chores (with repeating schedules), a weekly meal planner with recipe import and a shopping list, and a calendar where quests and events can be dragged to another day. A household can share chores, meals and the calendar through Supabase sync.\n\nBuilt with React, TypeScript and Vite, with the game world in Phaser and hand-made pixel art checked against a fixed palette. It works offline as an installable PWA, stores everything locally in IndexedDB with automatic backups, and also runs as a Windows desktop app with Electron, including a global quick-add shortcut and a system tray. Every sound is generated in code with the Web Audio API.`,
     gallery: [
       `${import.meta.env.BASE_URL}Photos/PlannerSC1.jpg`,
@@ -53,7 +60,7 @@ const projects: Project[] = [
     ],
   },
   {
-    id: '03', title: 'Pokédex', category: 'Digital Library', type: 'Web Design', year: '2026',
+    id: '04', title: 'Pokédex', category: 'Digital Library', type: 'Web Design', year: '2026',
     note: 'A simple Pokedex that includes the first 151 Pokemon, built with JS and a public API. Features search and filter functionality.',
     thumb: `${import.meta.env.BASE_URL}Photos/pokedexSC1.png`,
     href: 'https://zvou.github.io/Pokedex/',
@@ -66,11 +73,14 @@ const projects: Project[] = [
   },
 ]
 
+const featured = projects.find(p => p.featured)
+const listed   = projects.filter(p => !p.featured)
+
 // Groups without projects are hidden until there is something to show
 const groupedProjects = computed(() => [
-  { label: 'Web Design', key: 'web', items: projects.filter(p => p.type === 'Web Design') },
-  { label: 'Graphic Design', key: 'graphic', items: projects.filter(p => p.type === 'Graphic Design') },
-  { label: 'Other', key: 'other', items: projects.filter(p => p.type !== 'Web Design' && p.type !== 'Graphic Design') },
+  { label: 'Web Design', key: 'web', items: listed.filter(p => p.type === 'Web Design') },
+  { label: 'Graphic Design', key: 'graphic', items: listed.filter(p => p.type === 'Graphic Design') },
+  { label: 'Other', key: 'other', items: listed.filter(p => p.type !== 'Web Design' && p.type !== 'Graphic Design') },
 ].filter(g => g.items.length > 0))
 
 // Floating preview card
@@ -139,7 +149,7 @@ function isVideo(src: string): boolean {
 onMounted(() => {
   lerpPreview()
   if (!el.value) return
-  gsap.from(el.value.querySelectorAll('.p-cat-header, .p-row'), {
+  gsap.from(el.value.querySelectorAll('.p-feature, .p-cat-header, .p-row'), {
     scrollTrigger: { trigger: el.value, start: 'top 75%' },
     y: 40, opacity: 0, duration: 0.7, ease: 'power2.out', stagger: 0.1
   })
@@ -179,6 +189,34 @@ onUnmounted(() => cancelAnimationFrame(previewRaf))
           <div class="p-checker" aria-hidden="true"></div>
         </div>
       </div>
+
+      <!-- Featured project -->
+      <a
+        v-if="featured?.featured"
+        href="#"
+        class="p-feature"
+        @click="openGallery(featured, $event)"
+      >
+        <div class="p-feature-media">
+          <img :src="featured.featured.image" :alt="`${featured.title} screenshot`" />
+        </div>
+        <div class="p-feature-body">
+          <div class="p-feature-meta">
+            <span class="p-feature-badge">Featured</span>
+            <span>{{ featured.id }}</span>
+            <span>·</span>
+            <span>{{ featured.category }}</span>
+            <span>·</span>
+            <span>{{ featured.year }}</span>
+          </div>
+          <h3 class="p-feature-title">{{ featured.title }}</h3>
+          <p class="p-feature-pitch">{{ featured.featured.pitch }}</p>
+          <ul class="p-feature-tags">
+            <li v-for="tag in featured.featured.tags" :key="tag">{{ tag }}</li>
+          </ul>
+          <span class="p-feature-cta">View project <span aria-hidden="true">⊞</span></span>
+        </div>
+      </a>
 
       <div class="p-list">
         <template v-for="group in groupedProjects" :key="group.key">
@@ -376,6 +414,76 @@ onUnmounted(() => cancelAnimationFrame(previewRaf))
 .p-row:hover .p-name { color: var(--accent); }
 .p-row:hover .p-arrow { transform: rotate(0deg); color: var(--accent); }
 .p-row:hover .p-note { max-height: 2em; opacity: 1; margin-top: 0.3rem; }
+
+/* ── Featured card ── */
+.p-feature {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  margin-bottom: 3rem;
+  border: 1px solid color-mix(in srgb, var(--fg) 12%, transparent);
+  background: color-mix(in srgb, var(--fg) 3%, transparent);
+  color: var(--fg);
+  transition: border-color 0.2s;
+}
+.p-feature:hover { border-color: var(--accent); }
+.p-feature-media { overflow: hidden; line-height: 0; border-right: 1px solid color-mix(in srgb, var(--fg) 12%, transparent); }
+.p-feature-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.p-feature:hover .p-feature-media img { transform: scale(1.03); }
+.p-feature-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2.2rem;
+}
+.p-feature-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+}
+.p-feature-badge {
+  padding: 0.2rem 0.55rem;
+  background: var(--accent);
+  color: var(--bg);
+  letter-spacing: 0.2em;
+}
+.p-feature-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  transition: color 0.2s;
+}
+.p-feature:hover .p-feature-title { color: var(--accent); }
+.p-feature-pitch { font-size: 0.95rem; line-height: 1.7; color: var(--fg-dim); max-width: 42ch; }
+.p-feature-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; }
+.p-feature-tags li {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  color: var(--fg-dim);
+  padding: 0.25rem 0.7rem;
+  border: 1px solid color-mix(in srgb, var(--fg) 15%, transparent);
+}
+.p-feature-cta {
+  margin-top: auto;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
 
 /* Process note — hidden until hover */
 .p-note {
@@ -670,6 +778,9 @@ onUnmounted(() => cancelAnimationFrame(previewRaf))
   .gal-modal { max-height: 95vh; }
   .gal-info { max-height: none; }
   .p-ghost-word, .p-ghost-num, .p-reg { display: none; }
+  .p-feature { grid-template-columns: 1fr; }
+  .p-feature-media { border-right: none; border-bottom: 1px solid color-mix(in srgb, var(--fg) 12%, transparent); }
+  .p-feature-body { padding: 1.5rem; }
 }
 </style>
 
