@@ -44,6 +44,7 @@ const cols: { cat: string; skills: Skill[] }[] = [
   {
     cat: 'Tools & Platforms',
     skills: [
+      { name: 'Claude Code & AI agents', usedIn: ['Little by Little', 'This site'] },
       { name: 'Git & GitHub' },
       { name: 'Vite', usedIn: ['The Arsenal', 'Little by Little', 'This site'] },
       { name: 'GitHub Actions', usedIn: ['Diagnostics Tool', 'This site'] },
