@@ -264,7 +264,7 @@ onMounted(() => {
   letter-spacing: 0.08em;
   padding: 1rem 2rem;
   border: none;
-  cursor: none;
+  cursor: pointer;
   transition: opacity 0.2s;
   align-self: flex-start;
 }

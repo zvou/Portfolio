@@ -440,6 +440,7 @@ onMounted(() => {
   border: 1px solid color-mix(in srgb, var(--fg) 12%, transparent);
   background: color-mix(in srgb, var(--fg) 3%, transparent);
   color: var(--fg);
+  cursor: pointer;
   transition: border-color 0.2s;
 }
 .p-feature:hover { border-color: var(--accent); }

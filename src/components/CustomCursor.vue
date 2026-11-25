@@ -3,12 +3,11 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import gsap from 'gsap'
 import { prefersReducedMotion } from '../motion'
 
-const dot  = ref<HTMLElement | null>(null)
 const ring = ref<HTMLElement | null>(null)
 const isHover = ref(false)
 
 onMounted(() => {
-  if (!dot.value || !ring.value) return
+  if (!ring.value) return
 
   const lag = prefersReducedMotion ? 0 : 0.5
   const xToRing = gsap.quickTo(ring.value, 'x', { duration: lag, ease: 'power3.out' })
@@ -16,7 +15,6 @@ onMounted(() => {
 
   function onMove(e: MouseEvent) {
     const { clientX: x, clientY: y } = e
-    gsap.set(dot.value, { x: x - 4, y: y - 4 })
     xToRing(x - 20)
     yToRing(y - 20)
   }
@@ -35,26 +33,15 @@ onMounted(() => {
 </script>
 
 <template>
-  <div ref="dot"  class="c-dot"></div>
   <div ref="ring" class="c-ring" :class="{ hover: isHover }"></div>
 </template>
 
 <style scoped>
-.c-dot {
-  position: fixed;
-  top: 0; left: 0;
-  width: 8px; height: 8px;
-  background: var(--fg);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 99999;
-  will-change: transform;
-}
 .c-ring {
   position: fixed;
   top: 0; left: 0;
   width: 40px; height: 40px;
-  border: 1.5px solid rgba(13, 11, 8, 0.5);
+  border: 1.5px solid color-mix(in srgb, var(--fg) 45%, transparent);
   border-radius: 50%;
   pointer-events: none;
   z-index: 99998;
@@ -67,7 +54,7 @@ onMounted(() => {
 }
 
 @media (pointer: coarse) {
-  .c-dot, .c-ring { display: none; }
+  .c-ring { display: none; }
 }
 </style>
 

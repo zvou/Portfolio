@@ -131,7 +131,7 @@ function applyTheme() {
   align-items: center;
   justify-content: center;
   transition: color 0.2s, border-color 0.2s;
-  cursor: none;
+  cursor: pointer;
 }
 .theme-toggle:hover { color: var(--fg); border-color: var(--accent); }
 
@@ -141,7 +141,7 @@ function applyTheme() {
   gap: 7px;
   background: none;
   border: none;
-  cursor: none;
+  cursor: pointer;
   padding: 4px;
 }
 .burger span {

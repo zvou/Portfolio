@@ -67,7 +67,7 @@ main { overflow: hidden; }
   background: var(--accent);
   color: #0f0d0a;
   border: none;
-  cursor: none;
+  cursor: pointer;
   font-size: 1.2rem;
   font-weight: bold;
   z-index: 1000;
