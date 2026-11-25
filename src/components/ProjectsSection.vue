@@ -8,6 +8,8 @@ interface Project {
   id: string; title: string; category: string; type: string; year: string
   note: string; thumb?: string
   href?: string
+  /** A playable or live version, shown as a "Play the demo" link */
+  demo?: string
   gallery?: string[]
   description?: string
   /** Shown as the large card above the list instead of as a row */
@@ -42,6 +44,7 @@ const projects: Project[] = [
     id: '01', title: 'Little by Little [WIP]', category: 'Planner Game', type: 'App', year: '2026',
     note: 'A cosy pixel-art game that doubles as a planner for people who leave things to the last minute. Tasks are quests, and your homestead grows as you get things done.',
     thumb: `${import.meta.env.BASE_URL}Photos/thumbs/PlannerSC1.jpg`,
+    demo: 'https://zvou.github.io/little-by-little/',
     featured: {
       pitch: 'A cosy pixel-art game that helps you start things earlier. Your real tasks become quests, and your homestead grows as you get them done.',
       image: `${import.meta.env.BASE_URL}Photos/PlannerSC2.jpg`,
@@ -194,9 +197,9 @@ onMounted(() => {
       </div>
 
       <!-- Featured project -->
-      <a
+      <!-- A div, not a link, so the demo link can sit inside it -->
+      <div
         v-if="featured?.featured"
-        href="#"
         class="p-feature"
         @click="openGallery(featured, $event)"
       >
@@ -217,9 +220,19 @@ onMounted(() => {
           <ul class="p-feature-tags">
             <li v-for="tag in featured.featured.tags" :key="tag">{{ tag }}</li>
           </ul>
-          <span class="p-feature-cta">View project <span aria-hidden="true">⊞</span></span>
+          <div class="p-feature-actions">
+            <button type="button" class="p-feature-cta">View project <span aria-hidden="true">⊞</span></button>
+            <a
+              v-if="featured.demo"
+              :href="featured.demo"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="p-feature-demo"
+              @click.stop
+            >Play the demo <span aria-hidden="true">↗</span></a>
+          </div>
         </div>
-      </a>
+      </div>
 
       <div class="p-list">
         <template v-for="group in groupedProjects" :key="group.key">
@@ -323,6 +336,12 @@ onMounted(() => {
               <div class="gal-meta-row">
                 <span class="gal-meta-k">YEAR</span>
                 <span class="gal-meta-v">{{ galleryProject.year }}</span>
+              </div>
+              <div v-if="galleryProject.demo" class="gal-meta-row">
+                <span class="gal-meta-k">DEMO</span>
+                <a :href="galleryProject.demo" target="_blank" rel="noopener noreferrer" class="gal-meta-v gal-demo-link">
+                  Play it in your browser <span aria-hidden="true">↗</span>
+                </a>
               </div>
               <hr class="gal-rule" />
               <div class="gal-desc" v-if="galleryProject.description">
@@ -474,14 +493,38 @@ onMounted(() => {
   padding: 0.25rem 0.7rem;
   border: 1px solid color-mix(in srgb, var(--fg) 15%, transparent);
 }
-.p-feature-cta {
+.p-feature-actions {
   margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.4rem;
+}
+.p-feature-cta {
+  background: none;
+  border: none;
+  padding: 0;
   font-family: var(--font-body);
   font-size: 0.75rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--accent);
 }
+.p-feature-demo {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.6rem 1.1rem;
+  background: var(--accent);
+  color: var(--bg);
+  border: 1px solid var(--accent);
+  transition: background 0.2s, color 0.2s;
+}
+.p-feature-demo:hover, .p-feature-demo:focus-visible { background: transparent; color: var(--accent); }
+.gal-meta-v.gal-demo-link { color: var(--accent); }
+.gal-demo-link:hover { text-decoration: underline; }
 
 /* Process note — hidden until hover */
 .p-note {
@@ -534,9 +577,9 @@ onMounted(() => {
     transition: opacity 0.45s ease;
   }
   .p-row:hover .p-thumb img, .p-row:focus-visible .p-thumb img,
-  .p-feature:hover .p-feature-media img, .p-feature:focus-visible .p-feature-media img { filter: none; }
+  .p-feature:hover .p-feature-media img, .p-feature:focus-within .p-feature-media img { filter: none; }
   .p-row:hover .p-thumb::after, .p-row:focus-visible .p-thumb::after,
-  .p-feature:hover .p-feature-media::after, .p-feature:focus-visible .p-feature-media::after { opacity: 0; }
+  .p-feature:hover .p-feature-media::after, .p-feature:focus-within .p-feature-media::after { opacity: 0; }
 }
 .p-thumb-empty {
   display: flex;
