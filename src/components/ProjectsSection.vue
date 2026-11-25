@@ -47,7 +47,7 @@ const projects: Project[] = [
       image: `${import.meta.env.BASE_URL}Photos/PlannerSC2.jpg`,
       tags: ['React', 'TypeScript', 'Phaser', 'Pixel art', 'PWA + Electron'],
     },
-    description: `Little by Little is a cosy pixel-art game that also works as a motivation planner, built for people who put things off until the deadline (common with ADHD) and who enjoy cosy games. Your homestead and character run on your real day: tasks are quests, finishing them waters the garden and earns XP and coins, and the world never punishes you for a bad day.\n\nThe core is about starting earlier, not just finishing:\n- Start-by dates work backwards from the deadline, effort and a buffer, so the app nudges you to begin in time.\n- A "Just 10 minutes" focus timer on every quest, because starting is the hard part.\n- Big quests get split into small steps, each with its own earlier date.\n- Gentle streaks that rest and sick days never break, and nothing turns red for "late".\n\nIt covers work, hobbies, chores (with repeating schedules), a weekly meal planner with recipe import and a shopping list, and a calendar where quests and events can be dragged to another day. A household can share chores, meals and the calendar through Supabase sync.\n\nBuilt with React, TypeScript and Vite, with the game world in Phaser and hand-made pixel art checked against a fixed palette. It works offline as an installable PWA, stores everything locally in IndexedDB with automatic backups, and also runs as a Windows desktop app with Electron, including a global quick-add shortcut and a system tray. Every sound is generated in code with the Web Audio API.`,
+    description: `THE PROBLEM\nMost planners remind you when something is due. They don't help you start. Little by Little is for people who leave things to the last minute (common with ADHD) and who enjoy cosy games. It's a pixel-art game that runs on your real day: tasks are quests, finishing them grows your homestead and earns XP, and the world never punishes you for a bad day.\n\nMY ROLE\nI designed the game and made the product calls: the name, the look, the rules and what it should never do. I built it with Claude Code as my pair programmer, setting it up with project rules and a custom pixel-art skill, and reviewing what it made. Before building I researched cosy games, levelling systems like RuneScape's, and planner and focus apps, and I kept a log of every decision and who made it.\n\nKEY DECISIONS\n- Start earlier, not just finish: start-by dates work back from the deadline, the effort and a buffer, and every quest has a "Just 10 minutes" timer, because starting is the hard part.\n- Kind on bad days: nothing turns red for "late", streaks survive rest and sick days, and there are bare-minimum and sick-day modes.\n- Its own game, not a Stardew Valley copy: a homestead instead of a farm, a satchel instead of a numbered item bar, and real-life occasions like the first snow day instead of fixed festivals.\n- Readable first: body text in Atkinson Hyperlegible, a font made for reading, with the pixel fonts kept for short headings.\n\nHOW IT'S BUILT\nReact, TypeScript and Vite, with the game world in Phaser. Pixel art is drawn by script and with SpriteCook, then checked against a fixed palette. It works offline as an installable PWA with local IndexedDB storage and automatic backups, households can share chores, meals and the calendar through Supabase, and it also runs as a Windows desktop app with Electron. Every sound is generated in code.\n\nWHAT I LEARNED\nWriting every decision down, with the reason, kept a big project consistent and let me hand work to an AI agent without losing my design intent.`,
     gallery: [
       `${import.meta.env.BASE_URL}Photos/PlannerSC1.jpg`,
       `${import.meta.env.BASE_URL}Photos/PlannerSC2.jpg`,
@@ -131,6 +131,20 @@ function nextImage() {
 function prevImage() {
   const len = galleryProject.value?.gallery?.length ?? 0
   activeIndex.value = (activeIndex.value - 1 + len) % len
+}
+
+// Splits a description into paragraphs; a line in ALL CAPS becomes a section heading
+function descriptionBlocks(text: string): { heading: boolean; text: string }[] {
+  const blocks: { heading: boolean; text: string }[] = []
+  for (const para of text.split('\n\n')) {
+    const lines = para.split('\n')
+    if (/^[A-Z][A-Z' ]+$/.test(lines[0]) && lines[0] === lines[0].toUpperCase()) {
+      blocks.push({ heading: true, text: lines[0] })
+      lines.shift()
+    }
+    if (lines.length) blocks.push({ heading: false, text: lines.join('\n') })
+  }
+  return blocks
 }
 
 function isVideo(src: string): boolean {
@@ -311,7 +325,12 @@ onMounted(() => {
                 <span class="gal-meta-v">{{ galleryProject.year }}</span>
               </div>
               <hr class="gal-rule" />
-              <p class="gal-desc" v-if="galleryProject.description">{{ galleryProject.description }}</p>
+              <div class="gal-desc" v-if="galleryProject.description">
+                <template v-for="(block, i) in descriptionBlocks(galleryProject.description)" :key="i">
+                  <h4 v-if="block.heading" class="gal-desc-h">{{ block.text }}</h4>
+                  <p v-else>{{ block.text }}</p>
+                </template>
+              </div>
             </div>
           </div>
 
@@ -736,6 +755,17 @@ onMounted(() => {
   white-space: pre-line;
   margin-top: 0.4rem;
 }
+.gal-desc p + p { margin-top: 1em; }
+.gal-desc-h {
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  margin: 1.6em 0 0.3em;
+  line-height: 1.4;
+}
+.gal-desc-h:first-child { margin-top: 0; }
 
 /* ── Ghost deco ── */
 .p-ghost-word {
