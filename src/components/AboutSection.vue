@@ -63,7 +63,7 @@ onMounted(() => {
 
           <div class="a-body">
             <p>
-              I'm Amalie Wallenius, also known as zvou online. Right now I'm doing Digitale Talenter, which is basically where I dive deeper into web development and design.
+              I'm Amalie Wallenius, also known as zvou online. I recently finished Digitale Talenter, where I went deeper into web development and design, and I've just wrapped up a frontend internship at Cloudgeni.
             </p>
             <p>
               I got into coding through Neopets when I was 11 years old. There was this thing where you could customize your pet's page with HTML and CSS, so naturally I started messing around with it. That got me hooked on how websites work, and here we are.
@@ -72,7 +72,7 @@ onMounted(() => {
               I studied graphic design in Oslo for a bit, then moved to England to study Computer Science. I like combining both sides, so I end up building things that look good and actually work well.
             </p>
             <p>
-              Now I'm looking for a junior frontend role where I get to do both the design and the build.
+              Now I'm looking for my next role, ideally somewhere I get to both design and build things, and I can start right away.
             </p>
 
             <div class="a-stats">

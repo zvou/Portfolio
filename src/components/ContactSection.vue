@@ -52,11 +52,11 @@ onMounted(() => {
           <div class="c-frame c-frame--tl" aria-hidden="true"></div>
           <h2 class="c-title">Contact<br /><em>Me_</em></h2>
           <p class="c-desc">
-            Looking for a junior frontend or UI role in Oslo. Email is the fastest way to reach me.
+            Open to new roles and available now. Email is the fastest way to reach me.
           </p>
           <p class="c-now">
-            <span class="c-now-label">Currently</span>
-            Studying web development and design at Digitale Talenter
+            <span class="c-now-label">Recently</span>
+            Frontend intern at Cloudgeni · Finished Digitale Talenter
           </p>
           <div class="c-links">
             <a href="mailto:amaliewallenius@outlook.com" class="c-link c-link--email" @click="copyEmail">
