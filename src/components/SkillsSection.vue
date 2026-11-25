@@ -11,29 +11,45 @@ const cols: { cat: string; skills: Skill[] }[] = [
   {
     cat: 'Design',
     skills: [
-      { name: 'Affinity' }, { name: 'Photoshop' }, { name: 'Figma' },
+      { name: 'Figma' }, { name: 'Affinity' }, { name: 'Photoshop' },
       { name: 'Illustrator' }, { name: 'InDesign' }, { name: 'Clip Studio Paint' },
+      { name: 'Pixel art (Aseprite)', usedIn: ['Little by Little'] },
     ],
   },
   {
-    cat: 'Dev',
+    cat: 'Languages',
     skills: [
-      { name: 'HTML / CSS', usedIn: ['The Arsenal', 'Pokédex', 'This site'] },
-      { name: 'JavaScript', usedIn: ['Pokédex'] },
       { name: 'TypeScript', usedIn: ['The Arsenal', 'Little by Little', 'This site'] },
-      { name: 'Vue.js', usedIn: ['This site'] },
-      { name: 'React', usedIn: ['The Arsenal', 'Little by Little'] },
-      { name: 'Python' },
-      { name: 'SQL' },
+      { name: 'JavaScript', usedIn: ['Pokédex'] },
+      { name: 'HTML / CSS', usedIn: ['The Arsenal', 'Pokédex', 'This site'] },
+      { name: 'Python', usedIn: ['Diagnostics Tool'] },
       { name: 'C#', usedIn: ['Magnifier'] },
+      { name: 'SQL', usedIn: ['Little by Little'] },
+    ],
+  },
+  {
+    cat: 'Frameworks & Libraries',
+    skills: [
+      { name: 'React', usedIn: ['The Arsenal', 'Little by Little'] },
+      { name: 'Vue.js', usedIn: ['This site'] },
+      { name: 'Three.js', usedIn: ['This site'] },
+      { name: 'GSAP', usedIn: ['This site'] },
+      { name: 'Phaser', usedIn: ['Little by Little'] },
+      { name: 'Electron', usedIn: ['Little by Little'] },
+      { name: 'WPF', usedIn: ['Magnifier'] },
+      { name: 'Tkinter', usedIn: ['Diagnostics Tool'] },
+      { name: 'OpenCV', usedIn: ['Magnifier'] },
     ],
   },
   {
     cat: 'Tools & Platforms',
     skills: [
-      { name: 'Vite', usedIn: ['Little by Little', 'This site'] },
-      { name: 'Microsoft Dynamics 365' }, { name: 'VS Code' }, { name: 'Git' },
-      { name: 'Obsidian' }, { name: 'Magento' }, { name: 'DevOps' },
+      { name: 'Git & GitHub' },
+      { name: 'Vite', usedIn: ['The Arsenal', 'Little by Little', 'This site'] },
+      { name: 'GitHub Actions', usedIn: ['Diagnostics Tool', 'This site'] },
+      { name: 'Supabase', usedIn: ['Little by Little'] },
+      { name: 'Vitest & Playwright', usedIn: ['Little by Little'] },
+      { name: 'Microsoft Dynamics 365' }, { name: 'Magento' }, { name: 'DevOps' },
     ],
   },
 ]
@@ -136,7 +152,7 @@ onMounted(() => {
 
 .sk-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 3rem;
   border-top: 1px solid rgba(13, 11, 8, 0.1);
   padding-top: 3rem;
@@ -187,6 +203,10 @@ onMounted(() => {
   .skills { padding: 5rem 1.5rem; }
   .sk-grid { grid-template-columns: 1fr; gap: 2.5rem; }
   .sk-ghost-word, .sk-ghost-num { display: none; }
+}
+
+@media (min-width: 769px) and (max-width: 1100px) {
+  .sk-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 /* ── Ghost deco ── */
