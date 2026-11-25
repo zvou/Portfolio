@@ -6,8 +6,6 @@ import ScrollTrigger from 'gsap/ScrollTrigger'
 const el = ref<HTMLElement | null>(null)
 const emailCopied = ref(false)
 const EMAIL = 'amaliewallenius@outlook.com'
-// Put your CV at public/CV.pdf, then set this to `${import.meta.env.BASE_URL}CV.pdf`
-const CV_URL: string | null = null
 
 async function copyEmail(e: MouseEvent) {
   e.preventDefault()
@@ -52,7 +50,7 @@ onMounted(() => {
           <div class="c-frame c-frame--tl" aria-hidden="true"></div>
           <h2 class="c-title">Contact<br /><em>Me_</em></h2>
           <p class="c-desc">
-            Open to new roles and available now. Email is the fastest way to reach me.
+            Open to new roles and available now. Email is the fastest way to reach me, and my CV is available on request.
           </p>
           <p class="c-now">
             <span class="c-now-label">Recently</span>
@@ -70,10 +68,6 @@ onMounted(() => {
             <a href="https://github.com/zvou" target="_blank" class="c-link">
               <span class="c-link-label">GitHub</span>
               <span class="c-link-val">zvou</span>
-            </a>
-            <a v-if="CV_URL" :href="CV_URL" target="_blank" rel="noopener" class="c-link">
-              <span class="c-link-label">CV</span>
-              <span class="c-link-val">Download PDF ↓</span>
             </a>
           </div>
         </div>
